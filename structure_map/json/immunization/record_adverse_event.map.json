@@ -1,0 +1,1385 @@
+{
+  "resourceType": "StructureMap",
+  "id": "13038627",
+  "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038627",
+  "name": "RecordAdverseEvent",
+  "structure": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse",
+      "mode": "source"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/Bundle",
+      "mode": "target"
+    }
+  ],
+  "group": [
+    {
+      "name": "Aefi",
+      "typeMode": "none",
+      "input": [
+        {
+          "name": "src",
+          "type": "QuestionnaireResponse",
+          "mode": "source"
+        },
+        {
+          "name": "bundle",
+          "type": "Bundle",
+          "mode": "target"
+        }
+      ],
+      "rule": [
+        {
+          "name": "r_extract_encounter",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "bundle",
+              "contextType": "variable",
+              "element": "entry",
+              "variable": "entry"
+            },
+            {
+              "context": "entry",
+              "contextType": "variable",
+              "element": "resource",
+              "variable": "encounter",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "Encounter"
+                }
+              ]
+            }
+          ],
+          "dependent": [
+            {
+              "name": "ExtractEncounter",
+              "variable": [
+                "src",
+                "encounter"
+              ]
+            },
+            {
+              "name": "ExtractAdverseEvent",
+              "variable": [
+                "src",
+                "encounter",
+                "bundle"
+              ]
+            },
+            {
+              "name": "UpdatePatient",
+              "variable": [
+                "src",
+                "bundle"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "UpdatePatient",
+      "typeMode": "none",
+      "input": [
+        {
+          "name": "src",
+          "type": "QuestionnaireResponse",
+          "mode": "source"
+        },
+        {
+          "name": "bundle",
+          "type": "Bundle",
+          "mode": "target"
+        }
+      ],
+      "rule": [
+        {
+          "name": "r_dod_exists",
+          "source": [
+            {
+              "context": "src",
+              "element": "item",
+              "variable": "dod",
+              "condition": "((linkId = '670552cf-cd9e-4596-9d89-5d6e4872d523') and answer.value.exists())"
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_patient",
+              "source": [
+                {
+                  "context": "src",
+                  "element": "item",
+                  "variable": "pidItem",
+                  "condition": "((linkId = 'patient-id') and answer.value.exists())"
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_patient",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "bundle",
+                      "contextType": "variable",
+                      "element": "entry",
+                      "variable": "entry"
+                    },
+                    {
+                      "context": "entry",
+                      "contextType": "variable",
+                      "element": "resource",
+                      "variable": "patient",
+                      "transform": "create",
+                      "parameter": [
+                        {
+                          "valueString": "Patient"
+                        }
+                      ]
+                    }
+                  ],
+                  "rule": [
+                    {
+                      "name": "r_patient_id",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "context": "patient",
+                          "contextType": "variable",
+                          "element": "id",
+                          "variable": "pid",
+                          "transform": "create",
+                          "parameter": [
+                            {
+                              "valueString": "id"
+                            }
+                          ]
+                        }
+                      ],
+                      "rule": [
+                        {
+                          "name": "r_pid_value",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "pid",
+                              "contextType": "variable",
+                              "element": "value",
+                              "transform": "evaluate",
+                              "parameter": [
+                                {
+                                  "valueId": "pidItem"
+                                },
+                                {
+                                  "valueString": "$this.answer.value.trim()"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "r_dod",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "variable": "dateOfDeath",
+                          "transform": "evaluate",
+                          "parameter": [
+                            {
+                              "valueId": "src"
+                            },
+                            {
+                              "valueString": "$this.item.where(linkId = '670552cf-cd9e-4596-9d89-5d6e4872d523').answer.value"
+                            }
+                          ]
+                        }
+                      ],
+                      "rule": [
+                        {
+                          "name": "r_deceased_dt",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "patient",
+                              "contextType": "variable",
+                              "element": "deceased",
+                              "variable": "dt",
+                              "transform": "create",
+                              "parameter": [
+                                {
+                                  "valueString": "dateTime"
+                                }
+                              ]
+                            },
+                            {
+                              "context": "dt",
+                              "contextType": "variable",
+                              "element": "value",
+                              "transform": "evaluate",
+                              "parameter": [
+                                {
+                                  "valueId": "dateOfDeath"
+                                },
+                                {
+                                  "valueString": "$this.value.substring(0, 10) + 'T00:00:00.00Z'"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "r_patient_active",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "context": "patient",
+                          "contextType": "variable",
+                          "element": "active",
+                          "transform": "copy",
+                          "parameter": [
+                            {
+                              "valueBoolean": false
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExtractEncounter",
+      "typeMode": "none",
+      "input": [
+        {
+          "name": "src",
+          "type": "QuestionnaireResponse",
+          "mode": "source"
+        },
+        {
+          "name": "encounter",
+          "type": "Encounter",
+          "mode": "target"
+        }
+      ],
+      "rule": [
+        {
+          "name": "r_en_static",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "id",
+              "transform": "uuid"
+            },
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "status",
+              "transform": "copy",
+              "parameter": [
+                {
+                  "valueString": "finished"
+                }
+              ]
+            },
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "class",
+              "transform": "c",
+              "parameter": [
+                {
+                  "valueString": "http://terminology.hl7.org/CodeSystem/v3-ActCode"
+                },
+                {
+                  "valueString": "HH"
+                },
+                {
+                  "valueString": "Home health"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "r_cc",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "type",
+              "variable": "cc",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "CodeableConcept"
+                }
+              ]
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_cc_display",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "cc",
+                  "contextType": "variable",
+                  "element": "text",
+                  "transform": "copy",
+                  "parameter": [
+                    {
+                      "valueString": "Allergies and adverse reactions"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_c",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "cc",
+                  "contextType": "variable",
+                  "element": "coding",
+                  "variable": "c",
+                  "transform": "create",
+                  "parameter": [
+                    {
+                      "valueString": "Coding"
+                    }
+                  ]
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_c_system",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "system",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "http://snomed.info/sct"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "r_c_code",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "code",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "886921000000105"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "r_c_display",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "display",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "Allergies and adverse reactions"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "r_cc",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "priority",
+              "variable": "cc",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "CodeableConcept"
+                }
+              ]
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_cc_display",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "cc",
+                  "contextType": "variable",
+                  "element": "text",
+                  "transform": "copy",
+                  "parameter": [
+                    {
+                      "valueString": "Elective"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_c",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "cc",
+                  "contextType": "variable",
+                  "element": "coding",
+                  "variable": "c",
+                  "transform": "create",
+                  "parameter": [
+                    {
+                      "valueString": "Coding"
+                    }
+                  ]
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_c_system",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "system",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "http://terminology.hl7.org/ValueSet/v3-ActPriority"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "r_c_code",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "code",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "EL"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "r_c_display",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "c",
+                      "contextType": "variable",
+                      "element": "display",
+                      "transform": "copy",
+                      "parameter": [
+                        {
+                          "valueString": "Elective"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "r_en_subject",
+          "source": [
+            {
+              "context": "src",
+              "element": "subject",
+              "variable": "subject"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "subject",
+              "transform": "copy",
+              "parameter": [
+                {
+                  "valueId": "subject"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "r_enc_part_component",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "participant",
+              "variable": "encounterParticipant",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "Encounter_Participant"
+                }
+              ]
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_enc_part_individual",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "encounterParticipant",
+                  "contextType": "variable",
+                  "element": "individual",
+                  "variable": "encOwner",
+                  "transform": "create",
+                  "parameter": [
+                    {
+                      "valueString": "Reference"
+                    }
+                  ]
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_enc_part_reference",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "encOwner",
+                      "contextType": "variable",
+                      "element": "reference",
+                      "transform": "evaluate",
+                      "parameter": [
+                        {
+                          "valueId": "src"
+                        },
+                        {
+                          "valueString": "'Practitioner/' + $this.meta.tag.where($this.system = 'https://smartregister.org/practitioner-tag-id').code"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "r_en_period",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "encounter",
+              "contextType": "variable",
+              "element": "period",
+              "variable": "encounterPeriod",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "Period"
+                }
+              ]
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_en_period_start",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "encounterPeriod",
+                  "contextType": "variable",
+                  "element": "start",
+                  "transform": "evaluate",
+                  "parameter": [
+                    {
+                      "valueId": "src"
+                    },
+                    {
+                      "valueString": "now()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_en_period_end",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "encounterPeriod",
+                  "contextType": "variable",
+                  "element": "end",
+                  "transform": "evaluate",
+                  "parameter": [
+                    {
+                      "valueId": "src"
+                    },
+                    {
+                      "valueString": "now()"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ExtractAdverseEvent",
+      "typeMode": "none",
+      "input": [
+        {
+          "name": "src",
+          "type": "QuestionnaireResponse",
+          "mode": "source"
+        },
+        {
+          "name": "encounter",
+          "type": "Encounter",
+          "mode": "source"
+        },
+        {
+          "name": "bundle",
+          "type": "Bundle",
+          "mode": "target"
+        }
+      ],
+      "rule": [
+        {
+          "name": "r_extract_adverse_event",
+          "source": [
+            {
+              "context": "src"
+            }
+          ],
+          "target": [
+            {
+              "context": "bundle",
+              "contextType": "variable",
+              "element": "entry",
+              "variable": "entry"
+            },
+            {
+              "context": "entry",
+              "contextType": "variable",
+              "element": "resource",
+              "variable": "adverseEvent",
+              "transform": "create",
+              "parameter": [
+                {
+                  "valueString": "AdverseEvent"
+                }
+              ]
+            }
+          ],
+          "rule": [
+            {
+              "name": "r_ae_static",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "context": "adverseEvent",
+                  "contextType": "variable",
+                  "element": "id",
+                  "transform": "uuid"
+                },
+                {
+                  "context": "adverseEvent",
+                  "contextType": "variable",
+                  "element": "encounter",
+                  "transform": "reference",
+                  "parameter": [
+                    {
+                      "valueId": "encounter"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_ae_recorded_date",
+              "source": [
+                {
+                  "context": "src"
+                }
+              ],
+              "target": [
+                {
+                  "variable": "recordedDate",
+                  "transform": "evaluate",
+                  "parameter": [
+                    {
+                      "valueId": "src"
+                    },
+                    {
+                      "valueString": "$this.item.where(linkId = 'recorded-date').answer.value"
+                    }
+                  ]
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_recorded_date",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "adverseEvent",
+                      "contextType": "variable",
+                      "element": "recordedDate",
+                      "variable": "date",
+                      "transform": "create",
+                      "parameter": [
+                        {
+                          "valueString": "dateTime"
+                        }
+                      ]
+                    },
+                    {
+                      "context": "date",
+                      "contextType": "variable",
+                      "element": "value",
+                      "transform": "evaluate",
+                      "parameter": [
+                        {
+                          "valueId": "recordedDate"
+                        },
+                        {
+                          "valueString": "$this.value.substring(0, 10) + 'T00:00:00.00Z'"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_ae_se_child",
+              "source": [
+                {
+                  "context": "src",
+                  "element": "item",
+                  "variable": "item",
+                  "condition": "($this.linkId.where(contains('child-vaccines')).exists())"
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_ae_suspect_entity_child",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "adverseEvent",
+                      "contextType": "variable",
+                      "element": "suspectEntity",
+                      "variable": "aeSuspectEntity",
+                      "transform": "create",
+                      "parameter": [
+                        {
+                          "valueString": "AdverseEvent_SuspectEntity"
+                        }
+                      ]
+                    }
+                  ],
+                  "rule": [
+                    {
+                      "name": "r_ae_suspect_entity_child",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "context": "aeSuspectEntity",
+                          "contextType": "variable",
+                          "element": "instance",
+                          "variable": "aeOwner",
+                          "transform": "create",
+                          "parameter": [
+                            {
+                              "valueString": "Reference"
+                            }
+                          ]
+                        }
+                      ],
+                      "rule": [
+                        {
+                          "name": "r_ae_suspect_entity_instance_child",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "variable": "immunization",
+                              "transform": "evaluate",
+                              "parameter": [
+                                {
+                                  "valueId": "src"
+                                },
+                                {
+                                  "valueString": "$this.item.where(linkId = 'child-vaccines').answer.value.reference"
+                                }
+                              ]
+                            }
+                          ],
+                          "rule": [
+                            {
+                              "name": "r_ae_suspect_entity_instance_ref_child",
+                              "source": [
+                                {
+                                  "context": "src"
+                                }
+                              ],
+                              "target": [
+                                {
+                                  "context": "aeOwner",
+                                  "contextType": "variable",
+                                  "element": "reference",
+                                  "transform": "copy",
+                                  "parameter": [
+                                    {
+                                      "valueId": "immunization"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "r_ro",
+                      "source": [
+                        {
+                          "context": "src",
+                          "element": "item",
+                          "variable": "reactionOutcomeItem",
+                          "condition": "((linkId = '9bbf6a69-3c16-4052-82a5-8ca9f9102ef3') and answer.value.exists())"
+                        }
+                      ],
+                      "rule": [
+                        {
+                          "name": "r_causality",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "aeSuspectEntity",
+                              "contextType": "variable",
+                              "element": "causality",
+                              "variable": "causality",
+                              "transform": "create",
+                              "parameter": [
+                                {
+                                  "valueString": "AdverseEvent_SuspectEntityCausality"
+                                }
+                              ]
+                            }
+                          ],
+                          "rule": [
+                            {
+                              "name": "r_cc",
+                              "source": [
+                                {
+                                  "context": "src"
+                                }
+                              ],
+                              "target": [
+                                {
+                                  "context": "causality",
+                                  "contextType": "variable",
+                                  "element": "assessment",
+                                  "variable": "cc",
+                                  "transform": "create",
+                                  "parameter": [
+                                    {
+                                      "valueString": "CodeableConcept"
+                                    }
+                                  ]
+                                }
+                              ],
+                              "rule": [
+                                {
+                                  "name": "r_cc_display",
+                                  "source": [
+                                    {
+                                      "context": "src"
+                                    }
+                                  ],
+                                  "target": [
+                                    {
+                                      "context": "cc",
+                                      "contextType": "variable",
+                                      "element": "text",
+                                      "transform": "evaluate",
+                                      "parameter": [
+                                        {
+                                          "valueId": "reactionOutcomeItem"
+                                        },
+                                        {
+                                          "valueString": "$this.answer.value.display"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "r_c",
+                                  "source": [
+                                    {
+                                      "context": "src"
+                                    }
+                                  ],
+                                  "target": [
+                                    {
+                                      "context": "cc",
+                                      "contextType": "variable",
+                                      "element": "coding",
+                                      "variable": "c",
+                                      "transform": "create",
+                                      "parameter": [
+                                        {
+                                          "valueString": "Coding"
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "rule": [
+                                    {
+                                      "name": "r_c_system",
+                                      "source": [
+                                        {
+                                          "context": "src"
+                                        }
+                                      ],
+                                      "target": [
+                                        {
+                                          "context": "c",
+                                          "contextType": "variable",
+                                          "element": "system",
+                                          "transform": "copy",
+                                          "parameter": [
+                                            {
+                                              "valueString": "http://snomed.info/sct"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "r_c_code",
+                                      "source": [
+                                        {
+                                          "context": "src"
+                                        }
+                                      ],
+                                      "target": [
+                                        {
+                                          "context": "c",
+                                          "contextType": "variable",
+                                          "element": "code",
+                                          "transform": "evaluate",
+                                          "parameter": [
+                                            {
+                                              "valueId": "reactionOutcomeItem"
+                                            },
+                                            {
+                                              "valueString": "$this.answer.value.code"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "r_c_display",
+                                      "source": [
+                                        {
+                                          "context": "src"
+                                        }
+                                      ],
+                                      "target": [
+                                        {
+                                          "context": "c",
+                                          "contextType": "variable",
+                                          "element": "display",
+                                          "transform": "evaluate",
+                                          "parameter": [
+                                            {
+                                              "valueId": "reactionOutcomeItem"
+                                            },
+                                            {
+                                              "valueString": "$this.answer.value.display"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_ae_subject",
+              "source": [
+                {
+                  "context": "src",
+                  "element": "subject",
+                  "variable": "subject"
+                }
+              ],
+              "target": [
+                {
+                  "context": "adverseEvent",
+                  "contextType": "variable",
+                  "element": "subject",
+                  "transform": "copy",
+                  "parameter": [
+                    {
+                      "valueId": "subject"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "r_tor",
+              "source": [
+                {
+                  "context": "src",
+                  "element": "item",
+                  "variable": "item",
+                  "condition": "((linkId = '287f1e51-937b-4a44-ab72-6b82a0a1475f') and answer.value.exists())"
+                }
+              ],
+              "rule": [
+                {
+                  "name": "r_cc",
+                  "source": [
+                    {
+                      "context": "src"
+                    }
+                  ],
+                  "target": [
+                    {
+                      "context": "adverseEvent",
+                      "contextType": "variable",
+                      "element": "severity",
+                      "variable": "cc",
+                      "transform": "create",
+                      "parameter": [
+                        {
+                          "valueString": "CodeableConcept"
+                        }
+                      ]
+                    }
+                  ],
+                  "rule": [
+                    {
+                      "name": "r_cc_display",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "context": "cc",
+                          "contextType": "variable",
+                          "element": "text",
+                          "transform": "evaluate",
+                          "parameter": [
+                            {
+                              "valueId": "item"
+                            },
+                            {
+                              "valueString": "$this.answer.value.display"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "r_c",
+                      "source": [
+                        {
+                          "context": "src"
+                        }
+                      ],
+                      "target": [
+                        {
+                          "context": "cc",
+                          "contextType": "variable",
+                          "element": "coding",
+                          "variable": "c",
+                          "transform": "create",
+                          "parameter": [
+                            {
+                              "valueString": "Coding"
+                            }
+                          ]
+                        }
+                      ],
+                      "rule": [
+                        {
+                          "name": "r_c_system",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "c",
+                              "contextType": "variable",
+                              "element": "system",
+                              "transform": "copy",
+                              "parameter": [
+                                {
+                                  "valueString": "http://snomed.info/sct"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "r_c_code",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "c",
+                              "contextType": "variable",
+                              "element": "code",
+                              "transform": "evaluate",
+                              "parameter": [
+                                {
+                                  "valueId": "item"
+                                },
+                                {
+                                  "valueString": "$this.answer.value.code"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "r_c_display",
+                          "source": [
+                            {
+                              "context": "src"
+                            }
+                          ],
+                          "target": [
+                            {
+                              "context": "c",
+                              "contextType": "variable",
+                              "element": "display",
+                              "transform": "evaluate",
+                              "parameter": [
+                                {
+                                  "valueId": "item"
+                                },
+                                {
+                                  "valueString": "$this.answer.value.display"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

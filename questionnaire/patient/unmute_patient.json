@@ -1,0 +1,146 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "13038615",
+  "name": "UnmutePatient",
+  "title": "Unmute Patient",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2023-07-04T13:37:59.684+00:00",
+    "profile": [
+      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
+    ],
+    "tag": [
+      {
+        "system": "urn:ietf:bcp:47",
+        "code": "nb-NO",
+        "display": "Norsk Bokmål"
+      }
+    ]
+  },
+  "language": "nb-NO",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+      "valueCanonical": "https://fhir.labs.smartregister.org/StructureMap/13038623"
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-sidebar",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-information-message",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-information-message",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefintion/sdf-itemControl-visibility",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-help",
+            "display": "Hide help texts"
+          },
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-sublabel",
+            "display": "Hide sublabel texts"
+          }
+        ]
+      }
+    }
+  ],
+  "status": "draft",
+  "subjectType": [
+    "Patient"
+  ],
+  "publisher": "NHN",
+  "contact": [
+    {
+      "name": "http://www.nhn.no"
+    }
+  ],
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655"
+          }
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "highlight"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "dce5f517-4192-49e6-86d2-2a233ff58f2b",
+      "text": "Activate Patient",
+      "type": "display",
+      "required": false
+    },
+    {
+      "linkId": "42475092-b61e-44cd-eaeb-630d625343dd",
+      "text": "Do you want to reactivate this patient?",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "2d3a310a-dd0a-4934-82f2-bd38d14bb59e",
+            "system": "urn:uuid:33913a60-a6c5-4856-c193-9feafdfa8ded",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "6a9e79f2-dddd-487a-ba92-53d1f595c896",
+            "system": "urn:uuid:33913a60-a6c5-4856-c193-9feafdfa8ded",
+            "code": "no",
+            "display": "No"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.id"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "patient-id",
+      "type": "string"
+    }
+  ]
+}

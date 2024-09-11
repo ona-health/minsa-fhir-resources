@@ -1,0 +1,343 @@
+{
+  "appId": "giz-eir",
+  "id": "locationMap",
+  "configType": "geoWidget",
+  "profileId": "caregiverProfile",
+  "mapLayers": [
+    {
+      "layer": "STREET",
+      "active": true
+    },
+    {
+      "layer": "SATELLITE",
+      "active": false
+    },
+    {
+      "layer": "STREET_SATELLITE",
+      "active": false
+    }
+  ],
+  "registrationQuestionnaire": {
+    "id": "13030180",
+    "title": "Add New Client",
+    "saveButtonText": "Add New Client",
+    "setPractitionerDetails": true,
+    "setOrganizationDetails": true
+  },
+  "resourceConfig": {
+    "baseResource": {
+      "resource": "Location",
+      "dataQueries": [
+        {
+          "paramName": "type",
+          "filterCriteria": [
+            {
+              "dataType": "CODE",
+              "value": {
+                "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                "code": "238497"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "relatedResources": [
+      {
+        "id": "servicePointInventoryItems",
+        "resource": "List",
+        "searchParameter": "subject",
+        "relatedResources": [
+          {
+            "id": "availableRelatedPersons",
+            "resource": "RelatedPerson",
+            "searchParameter": "item",
+            "isRevInclude": false,
+            "relatedResources": [
+              {
+                "id": "availablePatients",
+                "resource": "Patient",
+                "searchParameter": "link",
+                "isRevInclude": true,
+                "relatedResources": [
+                  {
+                    "id": "availableTasks",
+                    "resource": "Task",
+                    "searchParameter": "subject",
+                    "isRevInclude": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "servicePointConfig": {
+    "rules": [
+      {
+        "name": "childCount",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('childCount', availablePatients.size())"
+        ]
+      },
+      {
+        "name": "dueTaskList",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('dueTaskList', service.filterResources(availableTasks, 'Task.status = \"ready\"'))"
+        ]
+      },
+      {
+        "name": "overdueTaskList",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('overdueTaskList', service.filterResources(data.get('allTasks'), 'Task.status = \"cancelled\" or Task.status = \"failed\"'))"
+        ]
+      },
+      {
+        "name": "dueTaskCount",
+        "condition": "true",
+        "priority": 3,
+        "actions": [
+          "data.put('dueTaskCount', data.get('dueTaskList').size())"
+        ]
+      },
+      {
+        "name": "overdueTaskCount",
+        "condition": "true",
+        "priority": 3,
+        "actions": [
+          "data.put('overdueTaskCount', data.get('overdueTaskList').size())"
+        ]
+      },
+      {
+        "name": "hasAnyDueTask",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('hasAnyDueTask', data.get('dueTaskList').size() > 0)"
+        ]
+      },
+      {
+        "name": "hasAnyOverdueTask",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('hasAnyOverdueTask', data.get('overdueTaskList').size() > 0)"
+        ]
+      },
+      {
+        "name": "visitStatus",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('visitStatus', data.get('hasAnyDueTask') ? 'finished' : data.get('hasAnyOverdueTask') ? 'in_progress' : 'not_started')"
+        ]
+      },
+      {
+        "name": "servicePointId",
+        "condition": "true",
+        "priority": 1,
+        "actions": [
+          "data.put('servicePointId',servicePointInventoryItems.get(0).entry.get(0).item.referenceElement.idPart)"
+        ]
+      },
+      {
+        "name": "name",
+        "condition": "true",
+        "actions": [
+          "data.put('name', fhirPath.extractValue(Location, \"Location.name\"))"
+        ]
+      },
+      {
+        "name": "locationId",
+        "condition": "true",
+        "actions": [
+          "data.put('name', fhirPath.extractValue(Location, \"Location.id\"))"
+        ]
+      },
+      {
+        "name": "status",
+        "condition": "true",
+        "actions": [
+          "data.put('status', 'active')"
+        ]
+      },
+      {
+        "name": "type",
+        "condition": "true",
+        "actions": [
+          "data.put('type', fhirPath.extractValue(Location, \"Location.type.where(coding[0].where(system = 'http://terminology.hl7.org/CodeSystem/v3-RoleCode')).where(coding[0].where(code != 'work')).coding[0].code\"))"
+        ]
+      },
+      {
+        "name": "servicePointType",
+        "condition": "true",
+        "actions": [
+          "data.put('servicePointType', fhirPath.extractValue(Location, \"Location.type.where(coding[0].where(system = 'http://terminology.hl7.org/CodeSystem/v3-RoleCode')).where(coding[0].where(code != 'work')).coding[0].display\"))"
+        ]
+      },
+      {
+        "name": "typeImage",
+        "condition": "true",
+        "priority": 1,
+        "actions": [
+          "data.put('typeImage', 'ic_csb_service_point')"
+        ]
+      }
+    ],
+    "servicePointProperties": {
+      "visitStatus": "@{visitStatus}",
+      "name": "@{name}",
+      "status": "@{status}",
+      "servicePointType": "@{servicePointType}",
+      "type": "@{type}",
+      "typeImage": "@{typeImage}",
+      "servicePointId": "@{servicePointId}",
+      "number": "@{childCount}",
+      "dueTaskCount": "@{dueTaskCount}",
+      "overdueTaskCount": "@{overdueTaskCount}"
+    }
+  },
+  "summaryBottomSheetConfig": {
+    "views": [
+      {
+        "viewType": "CARD",
+        "visible": "true",
+        "contentPadding": 0,
+        "content": [
+          {
+            "viewType": "CARD",
+            "contentPadding": 16,
+            "visible": "true",
+            "content": [
+              {
+                "viewType": "ROW",
+                "alignment": "START",
+                "fillMaxWidth": true,
+                "clickable": false,
+                "children": [
+                  {
+                    "viewType": "COLUMN",
+                    "fillMaxWidth": true,
+                    "alignment": "CENTER",
+                    "children": [
+                      {
+                        "viewType": "COMPOUND_TEXT",
+                        "primaryText": "@{name}",
+                        "primaryTextFontWeight": "BOLD",
+                        "fontSize": 17.0,
+                        "primaryTextColor": "#000000"
+                      },
+                      {
+                        "viewType": "SPACER",
+                        "height": 8
+                      },
+                      {
+                        "viewType": "COMPOUND_TEXT",
+                        "primaryText": "Number of Task due: @{dueTaskCount}",
+                        "fontSize": 14.0,
+                        "primaryTextColor": "#000000"
+                      },
+                      {
+                        "viewType": "SPACER",
+                        "height": 4
+                      },
+                      {
+                        "viewType": "COMPOUND_TEXT",
+                        "primaryText": "Number of Task Overdue: @{overdueTaskCount}",
+                        "fontSize": 14.0,
+                        "primaryTextColor": "#000000"
+                      },
+                      {
+                        "viewType": "SPACER",
+                        "height": 8
+                      },
+                      {
+                        "viewType": "BUTTON",
+                        "smallSized": true,
+                        "text": "View Profile",
+                        "status": "DUE",
+                        "startIcon": {
+                          "type": "local",
+                          "reference": "@{ic_home}"
+                        },
+                        "clickable": true,
+                        "fillMaxWidth": false,
+                        "actions": [
+                          {
+                            "trigger": "ON_CLICK",
+                            "workflow": "LAUNCH_PROFILE",
+                            "id": "caregiverProfile",
+                            "params": [
+                              {
+                                "paramType": "RESOURCE_ID",
+                                "key": "servicePointId",
+                                "value": "@{servicePointId}"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "showAddLocation": false,
+  "showPlaneSwitcher": true,
+  "showLocation": true,
+  "actions": [
+    {
+      "trigger": "ON_CLICK",
+      "workflow": "SUMMARY_BOTTOM_SHEET",
+      "id": "summaryBottomSheet",
+      "display": "Point Details",
+      "params": [
+        {
+          "paramType": "PARAMDATA",
+          "key": "servicePointId",
+          "value": "@{servicePointId}"
+        }
+      ]
+    }
+  ],
+  "topScreenSection": {
+    "title": "Caregiver",
+    "searchBar": {
+      "visible": true,
+      "display": "Search by location name",
+      "computedRules": [
+        "servicePointName"
+      ]
+    },
+    "menuIcons": [
+      {
+        "viewType": "IMAGE",
+        "size": 10,
+        "imageConfig": {
+          "type": "local",
+          "reference": "ic_service_points"
+        },
+        "actions": [
+          {
+            "trigger": "ON_CLICK",
+            "workflow": "LAUNCH_REGISTER",
+            "id": "caregiverRegister"
+          }
+        ]
+      }
+    ]
+  }
+}
