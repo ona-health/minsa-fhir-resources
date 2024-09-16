@@ -7,7 +7,7 @@
   },
   "identifier": {
     "use": "official",
-    "value": "giz-eir"
+    "value": "minsaEIR"
   },
   "status": "final",
   "type": {
@@ -353,21 +353,6 @@
             }
           },
           "mode": "working"
-        }
-      ]
-    },
-    {
-      "title": "Geo Widget configurations",
-      "mode": "working",
-      "section": [
-        {
-          "title": "Geo Widget configuration",
-          "focus": {
-            "reference": "Binary/8c554d3d-831e-46e5-9c35-9e8e726d80f4-420",
-            "identifier": {
-              "value": "locationMap"
-            }
-          }
         }
       ]
     }

@@ -1,5 +1,5 @@
 {
-  "appId": "giz-eir",
+  "appId": "minsaEIR",
   "configType": "register",
   "id": "caregiverRegister",
   "fhirResource": {
