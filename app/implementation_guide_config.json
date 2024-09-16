@@ -1,11 +1,11 @@
 {
   "resourceType": "ImplementationGuide",
-  "id": "13057302",
+  "id": "b955ff3b-ce50-4b18-b77d-d4803d95ddf4",
   "meta": {
     "versionId": "1",
     "lastUpdated": "2024-05-27T14:42:53.345+00:00"
   },
-  "url": "https://fhir.eir.smartregister.org/fhir/ImplementationGuide/giz-eir",
+  "url": "https://minsa-fhir.labs.smartregister.org/fhir/ImplementationGuide/minsaEIR",
   "version": "1.0.0",
   "name": "minsaEIR",
   "title": "MINSA EIR Implementation Guide",
@@ -26,7 +26,7 @@
     "resource": [
       {
         "reference": {
-          "reference": "Composition/12965652"
+          "reference": "Composition/982311d0-0533-42b6-a67f-07e7d4a77ec6"
         }
       }
     ]
