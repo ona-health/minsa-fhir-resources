@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "13038623",
+  "id": "82948c37-8456-4dbd-9c80-11f4ed78b451",
   "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038623",
   "name": "UnmutePatient",
   "structure": [

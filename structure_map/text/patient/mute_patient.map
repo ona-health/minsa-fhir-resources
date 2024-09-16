@@ -1,4 +1,4 @@
-map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038620" = 'MutePatient'
+map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/c813e883-f4f0-4700-9dc1-d92d556306c3" = 'MutePatient'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

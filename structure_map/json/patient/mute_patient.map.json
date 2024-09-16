@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "13038620",
+  "id": "c813e883-f4f0-4700-9dc1-d92d556306c3",
   "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038620",
   "name": "MutePatient",
   "structure": [

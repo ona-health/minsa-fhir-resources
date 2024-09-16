@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "13038625",
+  "id": "f564a1d3-63b0-4e56-9268-8e8f1190bf9b",
   "url": "http://fhir.zeir.smartregister.org/fhir/StructureMap/13038625",
   "name": "RecordChildRecurringService",
   "structure": [

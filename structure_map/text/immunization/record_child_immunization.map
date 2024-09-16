@@ -1,4 +1,4 @@
-map "http://fhir.zeir.smartregister.org/fhir/StructureMap/13034953" = 'RecordChildImmunization'
+map "http://fhir.zeir.smartregister.org/fhir/StructureMap/e02697e3-0828-465c-9ba0-6e8cbd676bfc" = 'RecordChildImmunization'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

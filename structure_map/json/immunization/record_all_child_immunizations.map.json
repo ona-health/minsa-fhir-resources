@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "13038626",
+  "id": "f9aca5f6-e3d0-4857-851c-4f87d1d619dc",
   "url": "http://fhir.zeir.smartregister.org/fhir/StructureMap/13038626",
   "name": "RecordAllChildImmunizations",
   "structure": [

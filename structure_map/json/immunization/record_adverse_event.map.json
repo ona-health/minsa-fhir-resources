@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "13038627",
+  "id": "e50bf630-a301-43f9-be9a-3db14ba1f6e9",
   "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038627",
   "name": "RecordAdverseEvent",
   "structure": [
