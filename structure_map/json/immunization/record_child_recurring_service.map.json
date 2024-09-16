@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "f564a1d3-63b0-4e56-9268-8e8f1190bf9b",
-  "url": "http://fhir.zeir.smartregister.org/fhir/StructureMap/13038625",
+  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f564a1d3-63b0-4e56-9268-8e8f1190bf9b",
   "name": "RecordChildRecurringService",
   "structure": [
     {

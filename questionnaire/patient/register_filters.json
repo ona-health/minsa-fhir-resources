@@ -1,61 +1,6 @@
 {
   "resourceType": "Questionnaire",
   "id": "eb18c25c-cc20-4f58-94e8-5dab7e72c79f",
-  "meta": {
-    "versionId": "2",
-    "lastUpdated": "2024-06-10T18:49:20.148+00:00",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "security": [
-      {
-        "system": "urn:oid:2.16.578.1.12.4.1.1.7618",
-        "code": "3",
-        "display": "Helsehjelp (Full)",
-        "_display": {
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/translation",
-              "extension": [
-                {
-                  "url": "lang",
-                  "valueCode": "fr"
-                },
-                {
-                  "url": "content",
-                  "valueString": "Helsehjelp (Full)"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Bokmål",
-        "_display": {
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/translation",
-              "extension": [
-                {
-                  "url": "lang",
-                  "valueCode": "fr"
-                },
-                {
-                  "url": "content",
-                  "valueString": "Bokmål"
-                }
-              ]
-            }
-          ]
-        }
-      }
-    ]
-  },
   "language": "nb-NO",
   "version": "0.0.1",
   "name": "Register_Filter",

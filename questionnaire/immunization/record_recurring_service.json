@@ -3,28 +3,6 @@
   "id": "51d57010-ed01-4518-91e0-ffb06ef6a11a",
   "name": "ChildRecurringService",
   "title": "Record Child Recurring Service",
-  "meta": {
-    "versionId": "1",
-    "lastUpdated": "2024-04-25T13:17:04.568+00:00",
-    "source": "#d152e7676ec08325",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "security": [
-      {
-        "system": "urn:oid:2.16.578.1.12.4.1.1.7618",
-        "code": "3",
-        "display": "Helsehjelp"
-      }
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Norsk Bokmål"
-      }
-    ]
-  },
   "language": "nb-NO",
   "extension": [
     {
@@ -43,7 +21,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038625"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f564a1d3-63b0-4e56-9268-8e8f1190bf9b"
     }
   ],
   "version": "0.0.1",

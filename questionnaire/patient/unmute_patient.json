@@ -3,25 +3,11 @@
   "id": "af6df727-3e30-4f15-a873-f97121a40449",
   "name": "UnmutePatient",
   "title": "Unmute Patient",
-  "meta": {
-    "versionId": "2",
-    "lastUpdated": "2023-07-04T13:37:59.684+00:00",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Norsk Bokmål"
-      }
-    ]
-  },
   "language": "nb-NO",
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://fhir.labs.smartregister.org/StructureMap/13038623"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/82948c37-8456-4dbd-9c80-11f4ed78b451"
     },
     {
       "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",

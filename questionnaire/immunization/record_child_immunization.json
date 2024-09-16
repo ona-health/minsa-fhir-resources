@@ -7,28 +7,6 @@
   "version": "0.0.1",
   "status": "active",
   "publisher": "ONA",
-  "meta": {
-    "versionId": "12",
-    "lastUpdated": "2023-07-13T14:02:16.848+00:00",
-    "source": "#5041c290953f02a1",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "security": [
-      {
-        "system": "urn:oid:2.16.578.1.12.4.1.1.7618",
-        "code": "3",
-        "display": "Helsehjelp"
-      }
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Norsk Bokmål"
-      }
-    ]
-  },
   "useContext": [
     {
       "code": {
@@ -71,7 +49,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://fhir.demo.smartregister.org/fhir/StructureMap/13034953"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e02697e3-0828-465c-9ba0-6e8cbd676bfc"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

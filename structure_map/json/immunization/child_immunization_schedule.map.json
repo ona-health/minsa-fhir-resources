@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "bb426783-f9a2-42a1-8cd6-4123be63f8e3",
-  "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13036617",
+  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/bb426783-f9a2-42a1-8cd6-4123be63f8e3",
   "name": "ChildImmunizationSchedule",
   "structure": [
     {

@@ -7,28 +7,6 @@
   "version": "0.0.1",
   "status": "active",
   "publisher": "echis",
-  "meta": {
-    "versionId": "1",
-    "lastUpdated": "2023-07-04T13:15:44.438+00:00",
-    "source": "#f5d780098083bcc1",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Norsk Bokmål"
-      }
-    ],
-    "security": [
-      {
-        "code": "3",
-        "display": "Helsehjelp",
-        "system": "urn:oid:2.16.578.1.12.4.1.1.7618"
-      }
-    ]
-  },
   "useContext": [
     {
       "code": {
@@ -56,7 +34,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://fhir.labs.smartregister.org/StructureMap/13038620"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/c813e883-f4f0-4700-9dc1-d92d556306c3"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

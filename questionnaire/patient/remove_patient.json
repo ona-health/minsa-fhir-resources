@@ -7,26 +7,6 @@
   "version": "0.0.2",
   "status": "active",
   "publisher": "ona",
-  "meta": {
-    "versionId": "8",
-    "lastUpdated": "2023-06-14T16:01:41.213+00:00",
-    "source": "#9248d1f281e373f0",
-    "profile": [
-      "http://ehelse.no/fhir/StructureDefinition/sdf-Questionnaire"
-    ],
-    "tag": [
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "nb-NO",
-        "display": "Norsk Bokmål"
-      },
-      {
-        "system": "urn:ietf:bcp:47",
-        "code": "en-GB",
-        "display": "English"
-      }
-    ]
-  },
   "useContext": [
     {
       "code": {
@@ -55,7 +35,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038622"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

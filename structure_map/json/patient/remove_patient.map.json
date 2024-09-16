@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "62dae4c4-aca5-4397-9f12-f8569dbbdf12",
-  "url": "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/13038622",
+  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12",
   "name": "RemovePatient",
   "structure": [
     {

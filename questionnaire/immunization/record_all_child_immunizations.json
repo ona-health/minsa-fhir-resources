@@ -3,22 +3,10 @@
   "id": "9ddaa9c8-20c5-4246-a22e-7824ca7c3ae2",
   "name": "RecordAllChildImmunizations",
   "title": "Record All Child Immunizations",
-  "meta": {
-    "versionId": "10",
-    "lastUpdated": "2023-07-05T12:48:25.637+00:00",
-    "source": "#a334903091019267",
-    "security": [
-      {
-        "system": "urn:oid:2.16.578.1.12.4.1.1.7618",
-        "code": "3",
-        "display": "Helsehjelp"
-      }
-    ]
-  },
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "http://fhir.zeir.smartregister.org/fhir/StructureMap/13038626"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f9aca5f6-e3d0-4857-851c-4f87d1d619dc"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

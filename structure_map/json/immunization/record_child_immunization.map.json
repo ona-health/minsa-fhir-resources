@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "e02697e3-0828-465c-9ba0-6e8cbd676bfc",
-  "url": "http://fhir.zeir.smartregister.org/fhir/StructureMap/13034953",
+  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e02697e3-0828-465c-9ba0-6e8cbd676bfc",
   "name": "RecordChildImmunization",
   "structure": [
     {
