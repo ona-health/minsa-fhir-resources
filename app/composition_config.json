@@ -153,6 +153,22 @@
       "mode": "working"
     },
     {
+      "title": "Health Facility Locations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Health Facilities",
+          "focus": {
+            "reference": "List/0571e685-362e-4d8b-b227-a3678ad5420c-420",
+            "identifier": {
+              "value": "health-facility-locations"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    },
+    {
       "title": "PlanDefinitions",
       "mode": "working",
       "section": [
