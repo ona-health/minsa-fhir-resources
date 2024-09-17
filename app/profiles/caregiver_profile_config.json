@@ -626,7 +626,7 @@
           "trigger": "ON_CLICK",
           "workflow": "LAUNCH_QUESTIONNAIRE",
           "questionnaire": {
-            "id": "13030180",
+            "id": "35d04c25-0385-40ae-b7b1-e0e5a005edc1",
             "title": "Add New Child",
             "saveButtonText": "Submit",
             "planDefinitions": [
@@ -691,7 +691,7 @@
           "trigger": "ON_CLICK",
           "workflow": "LAUNCH_QUESTIONNAIRE",
           "questionnaire": {
-            "id": "13030180",
+            "id": "35d04c25-0385-40ae-b7b1-e0e5a005edc1",
             "title": "Patient registration info",
             "saveButtonText": "Update registration",
             "setPractitionerDetails": true,
