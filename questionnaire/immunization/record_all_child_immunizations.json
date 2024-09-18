@@ -6,7 +6,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f9aca5f6-e3d0-4857-851c-4f87d1d619dc"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-all-immunization-sm"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

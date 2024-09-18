@@ -35,7 +35,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12"
+      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/remove-patient-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",
