@@ -1,6 +1,6 @@
 {
   "resourceType": "Questionnaire",
-  "id": "af6df727-3e30-4f15-a873-f97121a40449",
+  "id": "unmute-patient-qn",
   "name": "UnmutePatient",
   "title": "Unmute Patient",
   "language": "nb-NO",

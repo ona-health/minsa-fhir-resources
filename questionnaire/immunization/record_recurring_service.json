@@ -1,6 +1,6 @@
 {
   "resourceType": "Questionnaire",
-  "id": "51d57010-ed01-4518-91e0-ffb06ef6a11a",
+  "id": "record-recurring-qn",
   "name": "ChildRecurringService",
   "title": "Record Child Recurring Service",
   "language": "nb-NO",

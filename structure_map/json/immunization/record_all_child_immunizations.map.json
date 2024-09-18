@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "f9aca5f6-e3d0-4857-851c-4f87d1d619dc",
+  "id": "record-all-immunization-sm",
   "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f9aca5f6-e3d0-4857-851c-4f87d1d619dc",
   "name": "RecordAllChildImmunizations",
   "structure": [

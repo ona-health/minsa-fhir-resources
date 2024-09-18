@@ -1,7 +1,7 @@
 {
   "resourceType": "Questionnaire",
   "language": "nb-NO",
-  "id": "5edb1eac-0825-416a-8b4f-917cbaf569db",
+  "id": "record-single-vaccine-qn",
   "name": "ChildImmunization",
   "title": "Child Immunization",
   "version": "0.0.1",

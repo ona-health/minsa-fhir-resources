@@ -1,4 +1,4 @@
-map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/e50bf630-a301-43f9-be9a-3db14ba1f6e9" = 'RecordAdverseEvent'
+map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/record-adverse-event-sm" = 'RecordAdverseEvent'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

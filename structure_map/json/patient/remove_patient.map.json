@@ -1,6 +1,6 @@
 {
   "resourceType": "StructureMap",
-  "id": "62dae4c4-aca5-4397-9f12-f8569dbbdf12",
+  "id": "remove-patient-sm",
   "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12",
   "name": "RemovePatient",
   "structure": [
