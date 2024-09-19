@@ -7,7 +7,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/unmute-patient-sm"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/unmute-patient-sm"
     },
     {
       "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",

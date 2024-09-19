@@ -874,7 +874,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-bcg-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -897,7 +897,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-bcg-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -920,7 +920,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-opv-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -943,7 +943,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-opv-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -966,7 +966,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-penta-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -989,7 +989,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-penta-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1012,7 +1012,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-rota-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1035,7 +1035,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-rota-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1058,7 +1058,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-pcv-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1081,7 +1081,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-pcv-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1104,7 +1104,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-ipv-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1127,7 +1127,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-ipv-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1150,7 +1150,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-measles-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1173,7 +1173,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-measles-booster-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         },
         {
             "prefix": "1",
@@ -1196,7 +1196,7 @@
                 ]
             },
             "definitionCanonical": "#careplan-hpv-task-activity",
-            "transform": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
+            "transform": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm"
         }
     ]
 }

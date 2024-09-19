@@ -49,7 +49,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-single-immunization-sm"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-single-immunization-sm"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

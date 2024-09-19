@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "record-single-immunization-sm",
-  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e02697e3-0828-465c-9ba0-6e8cbd676bfc",
+  "url": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-single-immunization-sm",
   "name": "RecordChildImmunization",
   "structure": [
     {

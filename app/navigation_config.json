@@ -18,7 +18,7 @@
             "memberResourceType": "Patient"
           },
           "planDefinitions": [
-            "e401e855-4702-438b-b334-52077f6fb78d"
+            "child-immunization-pd"
           ],
           "snackBarMessage": {
             "message": "New caregiver added",

@@ -1,4 +1,4 @@
-map "http://fhir.zeir.smartregister.org/fhir/StructureMap/record-single-immunization-sm" = 'RecordChildImmunization'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-single-immunization-sm" = 'RecordChildImmunization'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

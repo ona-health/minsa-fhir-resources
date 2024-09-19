@@ -1,4 +1,4 @@
-map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/immunization-schedule-sm" = 'ChildImmunizationSchedule'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/immunization-schedule-sm" = 'ChildImmunizationSchedule'
 
 uses "http://hl7.org/fhir/StructureDefinition/Parameters" as source
 uses "http://hl7.org/fhir/StructureDefinition/CarePlan" as target

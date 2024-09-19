@@ -36,7 +36,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/patient-registration-sm"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/patient-registration-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

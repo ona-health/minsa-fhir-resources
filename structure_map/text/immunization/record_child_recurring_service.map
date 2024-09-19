@@ -1,4 +1,4 @@
-map "http://fhir.zeir.smartregister.org/fhir/StructureMap/record-recurring-sm" = 'RecordChildRecurringService'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-recurring-sm" = 'RecordChildRecurringService'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

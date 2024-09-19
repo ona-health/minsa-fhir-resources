@@ -65,7 +65,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-adverse-event-sm"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-adverse-event-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

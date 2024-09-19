@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
   "id": "record-adverse-event-sm",
-  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e50bf630-a301-43f9-be9a-3db14ba1f6e9",
+  "url": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-adverse-event-sm",
   "name": "RecordAdverseEvent",
   "structure": [
     {

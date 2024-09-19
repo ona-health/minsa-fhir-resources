@@ -1,6 +1,6 @@
 {
     "resourceType": "List",
-    "id": "health-facility-locations-id",
+    "id": "health-facility-locations",
     "identifier": [
         {
             "use": "official",

@@ -1,6 +1,6 @@
 {
   "resourceType": "Composition",
-  "id": "composition-id",
+  "id": "minsa-eir-composition-config",
   "meta": {
     "versionId": "17",
     "lastUpdated": "2024-07-07T19:34:32.167+00:00"
@@ -30,7 +30,7 @@
         {
           "title": "Child profile configuration",
           "focus": {
-            "reference": "Binary/child-profile-id",
+            "reference": "Binary/child-profile",
             "identifier": {
               "value": "childProfile"
             }
@@ -39,7 +39,7 @@
         {
           "title": "Child Past Encounters profile configuration",
           "focus": {
-            "reference": "Binary/child-past-encounters-id",
+            "reference": "Binary/child-past-encounters-profile",
             "identifier": {
               "value": "childpastencountersProfile"
             }
@@ -48,7 +48,7 @@
         {
           "title": "Child Upcoming Encounters profile configuration",
           "focus": {
-            "reference": "Binary/child-upcoming-encounters-id",
+            "reference": "Binary/child-upcoming-encounters-profile",
             "identifier": {
               "value": "childupcomingencountersProfile"
             }
@@ -57,7 +57,7 @@
         {
           "title": "Caregiver profile configuration",
           "focus": {
-            "reference": "Binary/caregiver-profile-id",
+            "reference": "Binary/caregiver-profile",
             "identifier": {
               "value": "caregiverProfile"
             }
@@ -72,7 +72,7 @@
         {
           "title": "Children register configuration",
           "focus": {
-            "reference": "Binary/child-register-id",
+            "reference": "Binary/child-register",
             "identifier": {
               "value": "childRegister"
             }
@@ -81,7 +81,7 @@
         {
           "title": "Caregiver register configuration",
           "focus": {
-            "reference": "Binary/caregiver-register-id",
+            "reference": "Binary/caregiver-register",
             "identifier": {
               "value": "caregiverRegister"
             }
@@ -96,7 +96,7 @@
         {
           "title": "Translation English",
           "focus": {
-            "reference": "Binary/translation-english-id",
+            "reference": "Binary/translation-english",
             "identifier": {
               "value": "strings"
             }
@@ -105,7 +105,7 @@
         {
           "title": "Translation Spanish",
           "focus": {
-            "reference": "Binary/translation-spanish-id",
+            "reference": "Binary/translation-spanish",
             "identifier": {
               "value": "stringsEs"
             }
@@ -114,7 +114,7 @@
         {
           "title": "Translation French",
           "focus": {
-            "reference": "Binary/translation-french-id",
+            "reference": "Binary/translation-french",
             "identifier": {
               "value": "stringsFr"
             }
@@ -125,7 +125,7 @@
     {
       "title": "Application configuration",
       "focus": {
-        "reference": "Binary/application-config-id",
+        "reference": "Binary/minsa-eir-application-config",
         "identifier": {
           "value": "application"
         }
@@ -135,7 +135,7 @@
     {
       "title": "Navigation configuration",
       "focus": {
-        "reference": "Binary/navigation-config-id",
+        "reference": "Binary/minsa-eir-navigation-config",
         "identifier": {
           "value": "navigation"
         }
@@ -145,7 +145,7 @@
     {
       "title": "Sync configuration",
       "focus": {
-        "reference": "Binary/sync-config-id",
+        "reference": "Binary/minsa-eir-sync-config",
         "identifier": {
           "value": "sync"
         }
@@ -159,7 +159,7 @@
         {
           "title": "Health Facilities",
           "focus": {
-            "reference": "List/health-facility-locations-id",
+            "reference": "List/health-facility-locations",
             "identifier": {
               "value": "health-facility-locations"
             }
