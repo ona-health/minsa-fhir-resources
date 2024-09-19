@@ -10,7 +10,7 @@
         "trigger": "ON_CLICK",
         "workflow": "LAUNCH_QUESTIONNAIRE",
         "questionnaire": {
-          "id": "35d04c25-0385-40ae-b7b1-e0e5a005edc1",
+          "id": "patient-registration-qn",
           "title": "Add New Caregiver",
           "saveButtonText": "Save",
           "groupResource": {
@@ -18,7 +18,7 @@
             "memberResourceType": "Patient"
           },
           "planDefinitions": [
-            "e401e855-4702-438b-b334-52077f6fb78d"
+            "child-immunization-pd"
           ],
           "snackBarMessage": {
             "message": "New caregiver added",

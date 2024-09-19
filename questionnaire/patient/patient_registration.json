@@ -1,6 +1,6 @@
 {
   "resourceType": "Questionnaire",
-  "id": "35d04c25-0385-40ae-b7b1-e0e5a005edc1",
+  "id": "patient-registration-qn",
   "language": "nb-NO",
   "extension": [
     {
@@ -36,7 +36,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/b090bd7a-f460-4f07-8cac-aba24df05537"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/patient-registration-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

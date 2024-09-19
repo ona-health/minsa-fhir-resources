@@ -1,7 +1,7 @@
 {
   "resourceType": "Questionnaire",
   "language": "nb-NO",
-  "id": "5edb1eac-0825-416a-8b4f-917cbaf569db",
+  "id": "record-single-vaccine-qn",
   "name": "ChildImmunization",
   "title": "Child Immunization",
   "version": "0.0.1",
@@ -49,7 +49,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e02697e3-0828-465c-9ba0-6e8cbd676bfc"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-single-immunization-sm"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

@@ -1,7 +1,7 @@
 {
   "resourceType": "Questionnaire",
   "language": "nb-NO",
-  "id": "1006d298-5aac-48bd-892c-b875da4c562d",
+  "id": "record-adverse-qn",
   "name": "RecordAdverseEvent",
   "title": "Record Adverse Event",
   "status": "draft",
@@ -65,7 +65,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/e50bf630-a301-43f9-be9a-3db14ba1f6e9"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-adverse-event-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

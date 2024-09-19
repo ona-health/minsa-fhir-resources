@@ -1,7 +1,7 @@
 {
   "resourceType": "Questionnaire",
   "language": "en-GB",
-  "id": "e9965141-cdf7-4b4e-9b4b-3a49bf796dcf",
+  "id": "remove-patient-qn",
   "name": "RemovePatient",
   "title": "Remove Patient",
   "version": "0.0.2",
@@ -35,7 +35,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/remove-patient-sm"
     },
     {
       "url": "http://hl7.org/fhir/StructureDefinition/variable",

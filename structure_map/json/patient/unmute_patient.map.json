@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
-  "id": "82948c37-8456-4dbd-9c80-11f4ed78b451",
-  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/82948c37-8456-4dbd-9c80-11f4ed78b451",
+  "id": "unmute-patient-sm",
+  "url": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/unmute-patient-sm",
   "name": "UnmutePatient",
   "structure": [
     {

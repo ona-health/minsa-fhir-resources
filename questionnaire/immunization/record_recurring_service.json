@@ -1,6 +1,6 @@
 {
   "resourceType": "Questionnaire",
-  "id": "51d57010-ed01-4518-91e0-ffb06ef6a11a",
+  "id": "record-recurring-qn",
   "name": "ChildRecurringService",
   "title": "Record Child Recurring Service",
   "language": "nb-NO",
@@ -21,7 +21,7 @@
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/f564a1d3-63b0-4e56-9268-8e8f1190bf9b"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-recurring-sm"
     }
   ],
   "version": "0.0.1",

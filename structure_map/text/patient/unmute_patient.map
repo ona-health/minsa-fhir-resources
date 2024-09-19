@@ -1,4 +1,4 @@
-map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/82948c37-8456-4dbd-9c80-11f4ed78b451" = 'UnmutePatient'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/unmute-patient-sm" = 'UnmutePatient'
 
     uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse" as source
     uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

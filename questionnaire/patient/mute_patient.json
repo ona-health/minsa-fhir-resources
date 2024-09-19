@@ -1,7 +1,7 @@
 {
   "resourceType": "Questionnaire",
   "language": "nb-NO",
-  "id": "f40bd883-4016-4f27-b750-5e2cc6ae14ff",
+  "id": "mute-patient-qn",
   "name": "MutePatient",
   "title": "Mute Patient",
   "version": "0.0.1",
@@ -34,7 +34,7 @@
   "extension": [
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
-      "valueCanonical": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/c813e883-f4f0-4700-9dc1-d92d556306c3"
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/mute-patient-sm"
     },
     {
       "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",

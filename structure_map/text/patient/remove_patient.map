@@ -1,4 +1,4 @@
-map "https://fhir.giz-eir.smartregister.org/fhir/StructureMap/62dae4c4-aca5-4397-9f12-f8569dbbdf12" = 'RemovePatient'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/remove-patient-sm" = 'RemovePatient'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse" as source
 uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target

@@ -1,7 +1,7 @@
 {
   "resourceType": "StructureMap",
-  "id": "c813e883-f4f0-4700-9dc1-d92d556306c3",
-  "url": "https://minsa-fhir.labs.smartregister.org/fhir/StructureMap/c813e883-f4f0-4700-9dc1-d92d556306c3",
+  "id": "mute-patient-sm",
+  "url": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/mute-patient-sm",
   "name": "MutePatient",
   "structure": [
     {
