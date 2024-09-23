@@ -1,0 +1,70 @@
+{
+    "resourceType": "List",
+    "id": "health-facility-locations",
+    "identifier": [
+        {
+            "use": "official",
+            "value": "health-facility-locations-id"
+        }
+    ],
+    "status": "current",
+    "mode": "working",
+    "title": "Health Facility Locations",
+    "code": {
+        "coding": [
+            {
+                "system": "http://ona.io",
+                "code": "health-facility-locations",
+                "display": "Health Facility Locations"
+            }
+        ],
+        "text": "Health Facility Locations"
+    },
+    "entry": [
+        {
+            "item": {
+                "reference": "Location/1f4c76e1-9734-42d9-b5b8-4b213ee48d45"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/b2cfe935-5608-4dcc-8c27-7b2b41bda958"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/c302a5af-584a-4fee-a165-a4fd493dcb3e"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/d7a59033-e50e-451d-a136-78a7250e2b8f"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/258ede1b-7a13-4bfe-9436-93a02341eb2f"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/57a98100-b9c5-435f-aa0f-851fe424cae9"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/c8a36b1b-15bb-4af4-8e34-2f21bc255c8f"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/4cb1c941-38d3-44fa-bda1-d0ccf5393291"
+            }
+        },
+        {
+            "item": {
+                "reference": "Location/48bc9dcc-010d-4afd-b4cd-0de202a77415"
+            }
+        }
+    ]
+}

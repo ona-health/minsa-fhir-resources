@@ -1,0 +1,550 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "nb-NO",
+  "id": "record-adverse-qn",
+  "name": "RecordAdverseEvent",
+  "title": "Record Adverse Event",
+  "status": "draft",
+  "publisher": "NHN",
+  "contact": [
+    {
+      "name": "http://www.nhn.no"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",
+      "extension": [
+        {
+          "url": "name",
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/uv/sdc/CodeSystem/launchContext",
+            "code": "patient",
+            "display": "Patient"
+          }
+        },
+        {
+          "url": "type",
+          "valueCode": "Patient"
+        }
+      ]
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-sidebar",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-information-message",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-information-message",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefintion/sdf-itemControl-visibility",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-help",
+            "display": "Hide help texts"
+          },
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-sublabel",
+            "display": "Hide sublabel texts"
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/record-adverse-event-sm"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "vaccines",
+        "language": "application/x-fhir-query",
+        "expression": "Immunization?patient={{%patient.id.replaceMatches('/_history/.*', '')}}&_sort=date"
+      }
+    }
+  ],
+  "item": [
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "patient-id",
+      "type": "string",
+      "required": true,
+      "text": "Patient's Id"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "patient-age-in-years",
+      "type": "integer",
+      "required": false,
+      "text": "Patient's Age"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": false
+        }
+      ],
+      "linkId": "patient-birthdate",
+      "type": "string",
+      "required": false,
+      "text": "Patient's Birthdate"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ],
+            "text": "Drop down"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-answerExpression",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "Immunization?patient=Patient/{{%patient.id.replaceMatches('/_history/.*', '')}}&_sort=date"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-choiceColumn",
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "vaccineCode.text"
+            },
+            {
+              "url": "forDisplay",
+              "valueBoolean": true
+            }
+          ]
+        }
+      ],
+      "linkId": "child-vaccines",
+      "text": "Vaccine that caused the reaction",
+      "type": "reference",
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today()"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "recorded-date",
+      "text": "Date that the patient started experiencing the reaction",
+      "type": "date",
+      "required": true
+    },
+    {
+      "linkId": "a2f71c64-5ccc-4575-8638-d51aeefe6e6c",
+      "type": "choice",
+      "text": "Reaction manifestation",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "600fc7d0-6052-4a82-82cf-28d71f26dc38",
+            "code": "severe-local-reaction",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Severe local reaction"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "f9e4cbe6-e0a3-4abb-804d-19528f1ac919",
+            "code": "seizures",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Seizures"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "d734f8c0-614a-4f98-c269-8c38f57a62f6",
+            "code": "abscess",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Abscess"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "aedddae6-b8d3-4691-d627-fbb44b15d842",
+            "code": "sepsis",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Sepsis"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "3d12a0cd-8b70-466a-8335-889e1ed71741",
+            "code": "encephalopathy",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Encephalopathy"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "ae28419c-bbfc-4ab6-cf8f-94b8e77df275",
+            "code": "toxic-shock-syndrome",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Toxic shock syndrome"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "db16d360-da73-4f06-8d14-4ed3bffbbf51",
+            "code": "anaphylaxis",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Anaphylaxis"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "649fe212-3b85-41cf-8954-62d23633e7dd",
+            "code": "fever",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Fever"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "d554fcf9-92d1-464a-e5a0-111f3c3c7abd",
+            "code": "other",
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "display": "Other"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "ce7ac789-2bef-411c-c181-c4b02a2d08c6",
+      "type": "string",
+      "text": "Specify other type of reaction manifestation",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "a2f71c64-5ccc-4575-8638-d51aeefe6e6c",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:65f1c0a0-5fcc-409c-8bd0-097fe9458040",
+            "code": "other"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "287f1e51-937b-4a44-ab72-6b82a0a1475f",
+      "type": "choice",
+      "text": "Type of reaction",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "f2ed6ab5-6b76-4420-88b4-2fb7c59c488d",
+            "code": "non-serious",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Non serious"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "eb7be9fb-a8d5-45e7-92ab-bf776f7623b9",
+            "code": "death",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Death"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "89051954-8a41-4789-ee4a-a325946a1975",
+            "code": "life-threatening",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Life threatening"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "efa934bf-910d-4f0f-8378-ae6336f2d2c6",
+            "code": "disability",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Disability"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "5e1e8f71-f348-4525-9c3f-e9984933e316",
+            "code": "hospitalization",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Hospitalization"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "7988bef0-ccb0-4b5b-90af-ff2f029541f6",
+            "code": "congenital-anomaly",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Congenital anomaly"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "3d737f31-b571-4d11-8ff8-729136bf2416",
+            "code": "other-important-medical-event-(specify)",
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "display": "Other important medical event (specify)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "5aac5579-3892-43e4-892b-e59d2cfdc796",
+      "type": "string",
+      "text": "Specify Other important medical event ",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "287f1e51-937b-4a44-ab72-6b82a0a1475f",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "code": "other-important-medical-event-(specify)"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "9bbf6a69-3c16-4052-82a5-8ca9f9102ef3",
+      "type": "choice",
+      "text": "Reaction outcome",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "7446e2fc-78d8-47e1-d73f-1d15ade5c22f",
+            "code": "died",
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "display": "Died"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "164a3b04-caff-43be-9b68-77930c55f290",
+            "code": "recovered",
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "display": "Recovered"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "865f57a9-398d-4ebb-a850-74f580ce4e75",
+            "code": "recovered-with-sequelae",
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "display": "Recovered with sequelae"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "2d49f308-442c-4eb5-8ffb-8055189d9aa3",
+            "code": "recovering",
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "display": "Recovering"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "22ff649b-7479-45da-f097-d4efee63588c",
+            "code": "not-recovered",
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "display": "Not recovered"
+          }
+        }
+      ],
+      "enableWhen": [
+        {
+          "question": "287f1e51-937b-4a44-ab72-6b82a0a1475f",
+          "operator": "!=",
+          "answerCoding": {
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "code": "death"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today()"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - (((%resource.descendants().where(linkId='patient-age-in-years').answer.value * 365) + (iif((today().toString().substring(5, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(5, 2).toInteger().round()) < 0, 12 - (today().toString().substring(5, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(5, 2).toInteger().round()).toInteger() * (-1), today().toString().substring(5, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(5, 2).toInteger().round()) * 30.4167) + iif((today().toString().substring(8, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(8, 2).toInteger().round()) < 0, 30.4167 - (today().toString().substring(8, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(8, 2).toInteger().round()).toInteger() * (-1), today().toString().substring(8, 2).toInteger().round() - %resource.descendants().where(linkId='patient-birthdate').answer.value.toString().substring(8, 2).toInteger().round())).round().toString() + ' days').toQuantity()"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "670552cf-cd9e-4596-9d89-5d6e4872d523",
+      "text": "Date of Death",
+      "type": "date",
+      "required": true,
+      "enableBehavior": "any",
+      "enableWhen": [
+        {
+          "question": "287f1e51-937b-4a44-ab72-6b82a0a1475f",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:0b28611c-7e8f-42b9-fba2-968f1e4bf523",
+            "code": "death"
+          }
+        },
+        {
+          "question": "9bbf6a69-3c16-4052-82a5-8ca9f9102ef3",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:2aae15e8-4873-4460-e111-470f2d5b3a40",
+            "code": "died"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "drop-down"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "referred",
+      "text": "Was the patient referred?",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "ab3f0a15-0964-4af0-89a4-54bd21111418",
+            "system": "urn:uuid:220f33dc-4fc6-4a6b-c16f-006ea550cf52",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "d9dce381-acaf-4098-e17b-669707b17ead",
+            "system": "urn:uuid:220f33dc-4fc6-4a6b-c16f-006ea550cf52",
+            "code": "no",
+            "display": "No"
+          }
+        }
+      ],
+      "enableWhen": [
+        {
+          "question": "670552cf-cd9e-4596-9d89-5d6e4872d523",
+          "operator": "exists",
+          "answerBoolean": false
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "drop-down"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "aefi-form-completed",
+      "text": "AEFI form completed?",
+      "type": "choice",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "c8e493d3-84d5-4744-cb8f-912c37c97cef",
+            "system": "urn:uuid:d63e420a-b83d-4954-d1a2-a46497760fa8",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "37c938fb-3bc7-437b-c921-615f77a6494e",
+            "system": "urn:uuid:d63e420a-b83d-4954-d1a2-a46497760fa8",
+            "code": "no",
+            "display": "No"
+          }
+        }
+      ]
+    }
+  ]
+}
