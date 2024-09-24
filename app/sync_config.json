@@ -18,12 +18,9 @@
           "Location",
           "Observation",
           "Patient",
-          "PlanDefinition",
-          "Questionnaire",
           "QuestionnaireResponse",
           "RelatedPerson",
           "ServiceRequest",
-          "StructureMap",
           "Task"
         ]
       }
@@ -44,12 +41,9 @@
           "Location",
           "Observation",
           "Patient",
-          "PlanDefinition",
-          "Questionnaire",
           "QuestionnaireResponse",
           "RelatedPerson",
           "ServiceRequest",
-          "StructureMap",
           "Task"
         ],
         "type": "token",

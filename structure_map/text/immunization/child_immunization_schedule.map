@@ -50,7 +50,7 @@ group ExtractTask(
 
         subject then ExtractPeriod(subject, task) "r_task_period_extraction";
 
-        subject -> task.reasonReference = create('Reference') as reasonReference, reasonReference.reference = 'Questionnaire/13034952' "r_task_reason_reference";
+        subject -> task.reasonReference = create('Reference') as reasonReference, reasonReference.reference = 'Questionnaire/record-single-vaccine-qn' "r_task_reason_reference";
 
         // task groupIdentifier
         subject -> task.groupIdentifier = create('Identifier') as groupIdentifier then {
