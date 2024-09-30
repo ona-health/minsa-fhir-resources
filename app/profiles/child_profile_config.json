@@ -2865,7 +2865,7 @@
                         "filterCriteria": [
                           {
                             "dataType": "REFERENCE",
-                            "value": "PlanDefinition/13038618"
+                            "value": "PlanDefinition/child-immunization-pd"
                           }
                         ]
                       },

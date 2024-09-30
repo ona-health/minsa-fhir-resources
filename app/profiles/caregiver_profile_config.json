@@ -630,7 +630,7 @@
             "title": "Add New Child",
             "saveButtonText": "Submit",
             "planDefinitions": [
-              "13038618"
+              "child-immunization-pd"
             ],
             "snackBarMessage": {
               "message": "Child Added",
