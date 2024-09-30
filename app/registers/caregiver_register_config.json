@@ -199,23 +199,6 @@
       "computedRules": [
         "servicePointName"
       ]
-    },
-    "menuIcons": [
-      {
-        "viewType": "IMAGE",
-        "size": 10,
-        "imageConfig": {
-          "type": "local",
-          "reference": "ic_toggle_map_view"
-        },
-        "actions": [
-          {
-            "trigger": "ON_CLICK",
-            "workflow": "LAUNCH_MAP",
-            "id": "locationMap"
-          }
-        ]
-      }
-    ]
+    }
   }
 }
