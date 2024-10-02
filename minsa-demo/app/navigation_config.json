@@ -4,73 +4,21 @@
   "menuActionButton": {
     "id": "mainActionButton",
     "visible": true,
-    "display": "Add New Caregiver",
+    "display": "Add New Patient",
     "actions": [
       {
         "trigger": "ON_CLICK",
         "workflow": "LAUNCH_QUESTIONNAIRE",
         "questionnaire": {
-          "id": "patient-registration-qn",
-          "title": "Add New Caregiver",
+          "id": "b8454469-bef4-4b87-8d87-6cefb097af61",
+          "title": "Add New Patient",
           "saveButtonText": "Save",
-          "groupResource": {
-            "groupIdentifier": "@{familyLogicalId}",
-            "memberResourceType": "Patient"
-          },
-          "planDefinitions": [
-            "child-immunization-pd"
-          ],
+          "planDefinitions": [],
           "snackBarMessage": {
-            "message": "New caregiver added",
+            "message": "New patient added",
             "actionLabel": "UNDO",
             "duration": "Short"
           },
-          "configRules": [
-            {
-              "name": "humanReadableId",
-              "condition": "true",
-              "actions": [
-                "data.put('humanReadableId', service.generateRandomSixDigitInt())"
-              ]
-            },
-            {
-              "name": "humanReadableIdForChild",
-              "condition": "true",
-              "actions": [
-                "data.put('humanReadableIdForChild', service.generateRandomSixDigitInt())"
-              ]
-            }
-          ],
-          "extraParams": [
-            {
-              "paramType": "PREPOPULATE",
-              "linkId": "0d77d40f-098b-4329-9199-33b6e77aa864",
-              "dataType": "INTEGER",
-              "key": "opensrpId",
-              "value": "@{humanReadableId}"
-            },
-            {
-              "paramType": "PREPOPULATE",
-              "linkId": "6c976c04-8f9c-4b4c-aae8-b4d6006006c4",
-              "dataType": "INTEGER",
-              "key": "opensrpId",
-              "value": "@{humanReadableIdForChild}"
-            },
-            {
-              "paramType": "PREPOPULATE",
-              "linkId": "caregiver-present",
-              "dataType": "BOOLEAN",
-              "key": "caregiverPresent",
-              "value": "false"
-            },
-            {
-              "paramType": "PREPOPULATE",
-              "linkId": "show-child-fields",
-              "dataType": "BOOLEAN",
-              "key": "showChildFields",
-              "value": "true"
-            }
-          ],
           "setPractitionerDetails": true,
           "setOrganizationDetails": true
         }
@@ -95,26 +43,6 @@
         {
           "trigger": "ON_COUNT",
           "id": "caregiverRegister"
-        }
-      ]
-    },
-    {
-      "id": "childRegister",
-      "display": "Children",
-      "showCount": true,
-      "menuIconConfig": {
-        "type": "local",
-        "reference": "ic_children"
-      },
-      "actions": [
-        {
-          "trigger": "ON_CLICK",
-          "workflow": "LAUNCH_REGISTER",
-          "id": "childRegister"
-        },
-        {
-          "trigger": "ON_COUNT",
-          "id": "childRegister"
         }
       ]
     }
