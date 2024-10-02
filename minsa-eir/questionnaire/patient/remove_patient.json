@@ -1,0 +1,333 @@
+{
+  "resourceType": "Questionnaire",
+  "language": "en-GB",
+  "id": "remove-patient-qn",
+  "name": "RemovePatient",
+  "title": "Remove Patient",
+  "version": "0.0.2",
+  "status": "active",
+  "publisher": "ona",
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "Remove Person Form"
+          }
+        ]
+      }
+    }
+  ],
+  "contact": [
+    {
+      "name": "http://www.ona.io"
+    }
+  ],
+  "subjectType": [
+    "Patient"
+  ],
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/remove-patient-sm"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "age-in-months",
+        "language": "text/fhirpath",
+        "expression": "(((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(0, 4).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(0, 4).toInteger()) * 12) + (%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(5, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(5, 2).toInteger()) + ((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(8, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(8, 2).toInteger()) / 12))"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "age-in-years",
+        "language": "text/fhirpath",
+        "expression": "((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(0, 4).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(0, 4).toInteger()) + ((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(5, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(5, 2).toInteger()) / 12) + ((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(8, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(8, 2).toInteger()) / 365))"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "age-in-days",
+        "language": "text/fhirpath",
+        "expression": "(((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(0, 4).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(0, 4).toInteger()) * 365) + ((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(5, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(5, 2).toInteger()) * 30.417 ) + ((%resource.descendants().where(linkId='17b7fda5-514c-4408-88e7-52313ab0ef2f').answer.value.toString().substring(8, 2).toInteger() - %resource.descendants().where(linkId='ad68508d-2bfd-400c-b3f8-4d4a01174f81').answer.value.toString().substring(8, 2).toInteger())))"
+      }
+    }
+  ],
+  "date": "2022-03-21T00:00:00Z",
+  "item": [
+    {
+      "linkId": "ad68508d-2bfd-400c-b3f8-4d4a01174f81",
+      "type": "string",
+      "text": "birthDate",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ]
+    },
+    {
+      "linkId": "a11ebb0d-acb3-4038-956b-293a41acb85b",
+      "type": "string",
+      "text": "patientId",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ]
+    },
+    {
+      "linkId": "f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff",
+      "text": "Reason for removal",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "b7e33fa3-1a76-415c-805a-f78c4706b1a9",
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "moved-away",
+            "display": "Moved away"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "0e7d66a2-7bd8-43c4-b46a-d11081fd9773",
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "died",
+            "display": "Died"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "411f8687-a933-482b-d665-c46937b61aa5",
+            "code": "wrong/double-entry",
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "display": "Wrong/double entry"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "1b7b2559-c80b-496c-8c35-e512a693d8c7",
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "other",
+            "display": "Other"
+          }
+        }
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "radio-button"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+          "valueString": "Enter a valid date. Cannot be a date in the future."
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - 9000 days"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today()"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "b6c21488-87b8-4213-8cd0-d482367669c1",
+      "text": "Date moved away",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "moved-away"
+          }
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - 900 days"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today()"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "17b7fda5-514c-4408-88e7-52313ab0ef2f",
+      "text": "Date of death",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "died"
+          }
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "iif(%age-in-months >= 3 and %age-in-months < 12, (%age-in-months.toString() + ' months'), iif(%age-in-days < 90, ((%age-in-days / 7).toString() + ' weeks'), (%age-in-years.toString() + ' years'))).replaceMatches('[.]+[0-9]+', '')"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "%resource.descendants().where(linkId='f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff').answer.value.code='died'"
+          }
+        }
+      ],
+      "linkId": "98ac4694-590e-4cc2-83f3-cc6455e688c5",
+      "text": "Age at death",
+      "type": "string",
+      "required": true,
+      "readOnly": true
+    },
+    {
+      "linkId": "cd73cfdf-6d70-4b42-8887-21e27db0b9ec",
+      "text": "Cause of death",
+      "type": "choice",
+      "enableWhen": [
+        {
+          "question": "f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "died"
+          }
+        }
+      ],
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "709dbddc-cf12-46c2-8a8d-a08c1495de40",
+            "system": "urn:uuid:87f8de08-706e-4e86-8064-1c407a39e102",
+            "code": "maternal-death",
+            "display": "Maternal death"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "e127133e-ac62-43d2-bf5a-148f64c2104b",
+            "system": "urn:uuid:87f8de08-706e-4e86-8064-1c407a39e102",
+            "code": "neonatal-death",
+            "display": "Neonatal death"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "c72842cb-e5b8-4c70-8da8-87f2a2b84925",
+            "system": "urn:uuid:87f8de08-706e-4e86-8064-1c407a39e102",
+            "code": "reason-unknown",
+            "display": "Reason Unknown"
+          }
+        }
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "radio-button"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "8489d249-1ef3-4edb-aa99-b5713fd2cb0a",
+      "text": "Give other reasons for removal",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "f83bb7c0-dfd6-4aa8-9cb9-89d48b8040ff",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:e6b1ab13-ea28-4a53-9f92-77a10157a606",
+            "code": "other"
+          }
+        }
+      ],
+      "required": true
+    }
+  ]
+}

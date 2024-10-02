@@ -1,0 +1,360 @@
+{
+  "resourceType": "Composition",
+  "id": "minsa-eir-composition-config",
+  "meta": {
+    "versionId": "17",
+    "lastUpdated": "2024-07-07T19:34:32.167+00:00"
+  },
+  "identifier": {
+    "use": "official",
+    "value": "minsaEIR"
+  },
+  "status": "final",
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "1156600005",
+        "display": "Device setting parameter"
+      }
+    ]
+  },
+  "date": "2022-09-16",
+  "title": "Device configurations",
+  "confidentiality": "L",
+  "section": [
+    {
+      "title": "Profile configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Child profile configuration",
+          "focus": {
+            "reference": "Binary/child-profile",
+            "identifier": {
+              "value": "childProfile"
+            }
+          }
+        },
+        {
+          "title": "Child Past Encounters profile configuration",
+          "focus": {
+            "reference": "Binary/child-past-encounters-profile",
+            "identifier": {
+              "value": "childpastencountersProfile"
+            }
+          }
+        },
+        {
+          "title": "Child Upcoming Encounters profile configuration",
+          "focus": {
+            "reference": "Binary/child-upcoming-encounters-profile",
+            "identifier": {
+              "value": "childupcomingencountersProfile"
+            }
+          }
+        },
+        {
+          "title": "Caregiver profile configuration",
+          "focus": {
+            "reference": "Binary/caregiver-profile",
+            "identifier": {
+              "value": "caregiverProfile"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Register configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Children register configuration",
+          "focus": {
+            "reference": "Binary/child-register",
+            "identifier": {
+              "value": "childRegister"
+            }
+          }
+        },
+        {
+          "title": "Caregiver register configuration",
+          "focus": {
+            "reference": "Binary/caregiver-register",
+            "identifier": {
+              "value": "caregiverRegister"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Translation configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Translation English",
+          "focus": {
+            "reference": "Binary/translation-english",
+            "identifier": {
+              "value": "strings"
+            }
+          }
+        },
+        {
+          "title": "Translation Spanish",
+          "focus": {
+            "reference": "Binary/translation-spanish",
+            "identifier": {
+              "value": "stringsEs"
+            }
+          }
+        },
+        {
+          "title": "Translation French",
+          "focus": {
+            "reference": "Binary/translation-french",
+            "identifier": {
+              "value": "stringsFr"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Application configuration",
+      "focus": {
+        "reference": "Binary/minsa-eir-application-config",
+        "identifier": {
+          "value": "application"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Navigation configuration",
+      "focus": {
+        "reference": "Binary/minsa-eir-navigation-config",
+        "identifier": {
+          "value": "navigation"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Sync configuration",
+      "focus": {
+        "reference": "Binary/minsa-eir-sync-config",
+        "identifier": {
+          "value": "sync"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Health Facility Locations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Health Facilities",
+          "focus": {
+            "reference": "List/health-facility-locations",
+            "identifier": {
+              "value": "health-facility-locations"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    },
+    {
+      "title": "PlanDefinitions",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Child Immunization",
+          "focus": {
+            "reference": "PlanDefinition/child-immunization-pd",
+            "identifier": {
+              "value": "child-immunization"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    },
+    {
+      "title": "Questionnaires",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Add Patient",
+          "focus": {
+            "reference": "Questionnaire/patient-registration-qn",
+            "identifier": {
+              "value": "add-patient"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record Single Dose",
+          "focus": {
+            "reference": "Questionnaire/record-single-vaccine-qn",
+            "identifier": {
+              "value": "record-single-dose"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record All Doses",
+          "focus": {
+            "reference": "Questionnaire/record-all-immunization-qn",
+            "identifier": {
+              "value": "record-all-doses"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record Adverse Event",
+          "focus": {
+            "reference": "Questionnaire/record-adverse-qn",
+            "identifier": {
+              "value": "record-adverse-event"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Mute Patient",
+          "focus": {
+            "reference": "Questionnaire/mute-patient-qn",
+            "identifier": {
+              "value": "mute-patient"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Unmute Patient",
+          "focus": {
+            "reference": "Questionnaire/unmute-patient-qn",
+            "identifier": {
+              "value": "unmute-patient"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Remove Patient",
+          "focus": {
+            "reference": "Questionnaire/remove-patient-qn",
+            "identifier": {
+              "value": "remove-patient"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Register Filter",
+          "focus": {
+            "reference": "Questionnaire/register-filter-qn",
+            "identifier": {
+              "value": "register-filter"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    },
+    {
+      "title": "StructureMaps",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Patient Registration",
+          "focus": {
+            "reference": "StructureMap/patient-registration-sm",
+            "identifier": {
+              "value": "patient-registration"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record Single Dose",
+          "focus": {
+            "reference": "StructureMap/record-single-immunization-sm",
+            "identifier": {
+              "value": "record-single-dose"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record All Doses",
+          "focus": {
+            "reference": "StructureMap/record-all-immunization-sm",
+            "identifier": {
+              "value": "record-all-doses"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Child Immunizations PD SM",
+          "focus": {
+            "reference": "StructureMap/immunization-schedule-sm",
+            "identifier": {
+              "value": "child-immunizations-pd-sm"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Record Adverse Event SM",
+          "focus": {
+            "reference": "StructureMap/record-adverse-event-sm",
+            "identifier": {
+              "value": "record-adverse-event-sm"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Mute Patient SM",
+          "focus": {
+            "reference": "StructureMap/mute-patient-sm",
+            "identifier": {
+              "value": "mute-patient-sm"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Unmute Patient SM",
+          "focus": {
+            "reference": "StructureMap/unmute-patient-sm",
+            "identifier": {
+              "value": "unmute-patient-sm"
+            }
+          },
+          "mode": "working"
+        },
+        {
+          "title": "Remove Patient SM",
+          "focus": {
+            "reference": "StructureMap/remove-patient-sm",
+            "identifier": {
+              "value": "remove-patient-sm"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    }
+  ]
+}

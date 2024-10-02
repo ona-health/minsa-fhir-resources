@@ -1,0 +1,1329 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "patient-registration-qn",
+  "language": "nb-NO",
+  "extension": [
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-sidebar",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-sidebar",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefinition/sdf-information-message",
+      "valueCoding": {
+        "system": "http://helsenorge.no/fhir/ValueSet/sdf-information-message",
+        "code": "1"
+      }
+    },
+    {
+      "url": "http://helsenorge.no/fhir/StructureDefintion/sdf-itemControl-visibility",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-help",
+            "display": "Hide help texts"
+          },
+          {
+            "system": "http://helsenorge.no/fhir/CodeSystem/AttachmentRenderOptions",
+            "code": "hide-sublabel",
+            "display": "Hide sublabel texts"
+          }
+        ]
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+      "valueCanonical": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/patient-registration-sm"
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "provinces",
+        "language": "application/x-fhir-query",
+        "expression": "Location?partof=Location/1f731b14-2c1c-442b-bbc5-295ce29bb041"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "province-id",
+        "language": "text/fhirpath",
+        "expression": "%resource.descendants().where(linkId='3f3ab03a-7a4a-11ee-b962-0242ac120002').answer.value.reference"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "selected-province-name",
+        "language": "text/fhirpath",
+        "expression": "iif(%province-id.exists(), \"District: \" + %resource.descendants().where(linkId='3f3ab03a-7a4a-11ee-b962-0242ac120002').answer.value.display, 'District')"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "district-id",
+        "language": "text/fhirpath",
+        "expression": "%resource.descendants().where(linkId='ab2161d1-b4c3-47a1-a4b9-0c0b916842f4').answer.value.reference"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "selected-district-name",
+        "language": "text/fhirpath",
+        "expression": "iif(%district-id.exists(), \"Village: \" + %resource.descendants().where(linkId='ab2161d1-b4c3-47a1-a4b9-0c0b916842f4').answer.value.display, 'Village')"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "village-id",
+        "language": "text/fhirpath",
+        "expression": "%resource.descendants().where(linkId='b00bda77-6df2-4660-8134-c424fb1dbf4f').answer.value.reference"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-dob-year",
+        "language": "text/fhirpath",
+        "expression": "%resource.descendants().where(linkId='aa1ddb98-87a4-48a6-9d8c-4c80de1ec277').answer.value.toString().substring(0, 4).toInteger()"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-dob-month",
+        "language": "text/fhirpath",
+        "expression": "%resource.descendants().where(linkId='aa1ddb98-87a4-48a6-9d8c-4c80de1ec277').answer.value.toString().substring(5, 2).toInteger()"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-curr-year",
+        "language": "text/fhirpath",
+        "expression": "today().toString().substring(0, 4).toInteger()"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-curr-month",
+        "language": "text/fhirpath",
+        "expression": "today().toString().substring(5, 2).toInteger()"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-month",
+        "language": "text/fhirpath",
+        "expression": "%calc-dob-month"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-year",
+        "language": "text/fhirpath",
+        "expression": "iif(%resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger() > 0, iif(%resource.descendants().where(linkId='ff36c6b9-8975-4a2c-a9d1-f65d8d4b8f6f').answer.value.code = 'weeks', %resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger() / 52, %resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value), iif(%calc-dob-month > %calc-curr-month, (%calc-curr-year - 1) - %calc-dob-year, %calc-curr-year - %calc-dob-year)).toInteger()"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/variable",
+      "valueExpression": {
+        "name": "calc-age",
+        "language": "text/fhirpath",
+        "expression": "iif(%resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger() > 0, iif(%resource.descendants().where(linkId='ff36c6b9-8975-4a2c-a9d1-f65d8d4b8f6f').answer.value.code = 'weeks', (%resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger() div 52).toInteger(), %resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger()), (((%calc-year * 365.25) + (%calc-month * 365.25 / 12)) / 365.25).toString().replaceMatches('[.]+[0-9]+', '').toInteger())"
+      }
+    }
+  ],
+  "version": "1",
+  "name": "PatientRegistration",
+  "title": "Patient Registration",
+  "status": "draft",
+  "subjectType": [
+    "Patient",
+    "RelatedPerson"
+  ],
+  "date": "2023-02-20T00:00:00+03:00",
+  "publisher": "NHN",
+  "contact": [
+    {
+      "name": "http://www.nhn.no"
+    }
+  ],
+  "useContext": [
+    {
+      "code": {
+        "system": "http://hl7.org/fhir/ValueSet/usage-context-type",
+        "code": "focus",
+        "display": "Clinical Focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "urn:oid:2.16.578.1.12.4.1.1.8655",
+            "display": "EIR Client Registration"
+          }
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "linkId": "85e8d19c-56fe-4af7-961a-5341f449f96e",
+      "text": "Caregiver Information",
+      "type": "display",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": false
+    },
+    {
+      "extension": [
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/sdf-fhirpath",
+          "valueString": "Patient.extension.where(url = 'http://helsenorge.no/fhir/StructureDefinition/sdf-eir-id').value"
+        }
+      ],
+      "linkId": "0d77d40f-098b-4329-9199-33b6e77aa864",
+      "text": "Caregiver ID",
+      "type": "integer",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "readOnly": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "is-edit-profile",
+      "type": "boolean"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.name.given"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "9d017fa4-56d3-4d9b-b5f6-f9b3ba7d17a3",
+      "text": "First Name",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.name.given"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/entryFormat",
+          "valueString": "(Optional)"
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "7b41d922-376c-49bf-f6a8-faaa681e9ef6",
+      "text": "Middle Name",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "76bad83a-f061-4b22-8b4f-a95cbd5be4da",
+      "text": "Last Name",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "check-box"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "e79d201a-4e30-40ca-c1ef-060a3d449303",
+      "type": "choice",
+      "enableWhen": [
+        {
+          "question": "is-edit-profile",
+          "operator": "exists",
+          "answerBoolean": false
+        },
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all",
+      "required": false,
+      "repeats": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "2b96ecfc-7159-40ef-ddd9-4fdf845fddb7",
+            "system": "urn:uuid:c3f41b65-196a-4c9f-87cb-5c3f12030cd5",
+            "code": "574378ab-079b-4922-9b37-6a56e2d1aa95",
+            "display": "Date of Birth Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "RelatedPerson.birthDate"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - 43800 days"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - 5475 days"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "aa1ddb98-87a4-48a6-9d8c-4c80de1ec277",
+      "text": "Date of Birth",
+      "type": "date",
+      "enableWhen": [
+        {
+          "question": "e79d201a-4e30-40ca-c1ef-060a3d449303",
+          "operator": "exists",
+          "answerBoolean": false
+        },
+        {
+          "question": "is-edit-profile",
+          "operator": "exists",
+          "answerBoolean": false
+        },
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all",
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "%calc-month"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "calculated-month",
+      "text": "Calculated Month (Hidden)",
+      "type": "integer",
+      "enableWhen": [
+        {
+          "question": "e79d201a-4e30-40ca-c1ef-060a3d449303",
+          "operator": "exists",
+          "answerBoolean": false
+        }
+      ],
+      "readOnly": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "%calc-age"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "calculated-age",
+      "text": "Calculated Age (Hidden)",
+      "type": "integer",
+      "readOnly": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "iif(%resource.descendants().where(linkId='e79d201a-4e30-40ca-c1ef-060a3d449303').answer.value.code = '574378ab-079b-4922-9b37-6a56e2d1aa95', %resource.descendants().where(linkId='8ebf5364-6bdc-4e45-89a7-28c65ce019b7').answer.value.toInteger(), %calc-age)"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "age",
+      "text": "Age (Hidden)",
+      "type": "integer",
+      "readOnly": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/sdf-fhirpath",
+          "valueString": "Patient.extension.where(url = 'http://helsenorge.no/fhir/StructureDefinition/sdf-age').value"
+        },
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+          "valueString": "Please enter a valid age"
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueInteger": 120
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 15
+        }
+      ],
+      "linkId": "8ebf5364-6bdc-4e45-89a7-28c65ce019b7",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.age",
+      "text": "Age (years)",
+      "type": "integer",
+      "enableWhen": [
+        {
+          "question": "e79d201a-4e30-40ca-c1ef-060a3d449303",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:c3f41b65-196a-4c9f-87cb-5c3f12030cd5",
+            "code": "574378ab-079b-4922-9b37-6a56e2d1aa95"
+          }
+        },
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all",
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "drop-down"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "50330b11-c520-4f45-a8f4-44771097788d",
+      "text": "Sex",
+      "type": "choice",
+      "enableWhen": [
+        {
+          "question": "is-edit-profile",
+          "operator": "exists",
+          "answerBoolean": false
+        },
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "male",
+            "display": "Male"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "female",
+            "display": "Female"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "1f1ee2a8-ec46-42c6-a883-d7184a325199",
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "biological-sex-not-specified",
+            "display": "Biological sex not specified"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "0d570086-f5ff-4f1a-82dd-94ad0011f12f",
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "intersex",
+            "display": "Intersex"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ],
+            "text": "Drop down"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "(%resource.descendants().where(linkId='calculated-age').answer.value >= 18)"
+          }
+        }
+      ],
+      "linkId": "59d21749-f4d7-4725-bec5-e924d3ce1eeb",
+      "text": "Select Identification",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://fhir.demo.smartregister.org/fhir/national-id-number",
+            "code": "national-id-number",
+            "display": "National ID Number"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://fhir.demo.smartregister.org/fhir/passport-number",
+            "code": "passport-number",
+            "display": "Passport Number"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://fhir.demo.smartregister.org/fhir/driving-license-number",
+            "code": "driving-license-number",
+            "display": "Driving License Number"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://fhir.demo.smartregister.org/fhir/none",
+            "code": "00000000",
+            "display": "None"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "8d420cab-a72b-4190-ff05-306135edb39e",
+      "text": "Identification Number",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "59d21749-f4d7-4725-bec5-e924d3ce1eeb",
+          "operator": "!=",
+          "answerCoding": {
+            "system": "https://fhir.demo.smartregister.org/fhir/none",
+            "code": "none",
+            "display": "None"
+          }
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^\\d{10,16}$"
+        },
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+          "valueString": "Please enter a valid phone number"
+        },
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+          "valueString": "Phone number should be in the format of 0XXXXXXXXX"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "(%resource.descendants().where(linkId='calculated-age').answer.value >= 18)"
+          }
+        }
+      ],
+      "linkId": "06cbf2e9-3643-4c7b-80f6-f145126034da",
+      "text": "Mobile phone number",
+      "type": "string",
+      "required": true,
+      "maxLength": 16
+    },
+    {
+      "extension": [
+        {
+          "url": "https://github.com/google/android-fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "https://github.com/google/android-fhir/questionnaire-item-control",
+                "code": "location-widget"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "location-widget",
+      "text": "Record GPS Location",
+      "type": "group",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "item": [
+        {
+          "extension": [
+            {
+              "url": "gps-coordinate",
+              "valueString": "latitude"
+            }
+          ],
+          "linkId": "latitude",
+          "text": "Latitude",
+          "type": "decimal",
+          "required": true
+        },
+        {
+          "extension": [
+            {
+              "url": "gps-coordinate",
+              "valueString": "longitude"
+            }
+          ],
+          "linkId": "longitude",
+          "text": "Longitude",
+          "type": "decimal",
+          "required": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ],
+            "text": "Drop down"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-answerExpression",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "Location?partof=Location/1f731b14-2c1c-442b-bbc5-295ce29bb041"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-choiceColumn",
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "name"
+            },
+            {
+              "url": "forDisplay",
+              "valueBoolean": true
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "3f3ab03a-7a4a-11ee-b962-0242ac120002",
+      "text": "Province",
+      "type": "reference",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ],
+            "text": "Drop down"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-answerExpression",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "Location?partof={{%province-id}}"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-choiceColumn",
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "name"
+            },
+            {
+              "url": "forDisplay",
+              "valueBoolean": true
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "ab2161d1-b4c3-47a1-a4b9-0c0b916842f4",
+      "text": "District",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/cqf-expression",
+            "valueExpression": {
+              "language": "text/fhirpath",
+              "expression": "%selected-province-name"
+            }
+          }
+        ]
+      },
+      "type": "reference",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "drop-down",
+                "display": "Drop down"
+              }
+            ],
+            "text": "Drop down"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-answerExpression",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "Location?partof={{%district-id}}"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-choiceColumn",
+          "extension": [
+            {
+              "url": "path",
+              "valueString": "name"
+            },
+            {
+              "url": "forDisplay",
+              "valueBoolean": true
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "b00bda77-6df2-4660-8134-c424fb1dbf4f",
+      "text": "Village",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/cqf-expression",
+            "valueExpression": {
+              "language": "text/fhirpath",
+              "expression": "%selected-district-name"
+            }
+          }
+        ]
+      },
+      "type": "reference",
+      "enableWhen": [
+        {
+          "question": "caregiver-present",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "required": true
+    },
+    {
+      "linkId": "85e8d19c-56fe-4af7-961a-5341f449f9-6e",
+      "text": "Child Information",
+      "type": "display",
+      "required": false,
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/sdf-fhirpath",
+          "valueString": "Patient.extension.where(url = 'http://helsenorge.no/fhir/StructureDefinition/sdf-eir-id').value"
+        }
+      ],
+      "linkId": "6c976c04-8f9c-4b4c-aae8-b4d6006006c4",
+      "text": "Client ID",
+      "type": "integer",
+      "readOnly": true,
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.name.given"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "2c299b00-304e-4f2e-af1f-95d39137985a",
+      "text": "First Name",
+      "type": "string",
+      "required": true,
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.name.given"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/entryFormat",
+          "valueString": "(Optional)"
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "7716e7d2-28bb-4a52-8401-6b250a9b6cb3",
+      "text": "Middle Name",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/regex",
+          "valueString": "^[æøåÆØÅa-zA-Z\\- ]*$"
+        }
+      ],
+      "linkId": "3283721e-9af7-4cab-b379-844a6fab9e05",
+      "text": "Last Name",
+      "type": "string",
+      "required": true,
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "check-box"
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "550a5760-4ae6-4a52-9be0-a382b5035cad",
+      "type": "choice",
+      "required": false,
+      "repeats": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "2b96ecfc-7159-40ef-ddd9-4fdf845fddb7",
+            "system": "urn:uuid:c3f41b65-196a-4c9f-87cb-5c3f12030cd5",
+            "code": "574378ab-079b-4922-9b37-6a56e2d1aa95",
+            "display": "Unknown DOB, enter age"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.birthDate"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today()"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "today() - 5110 days"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "ffd72b7a-473a-43bc-80ed-449224e5f216",
+      "text": "Date of birth",
+      "type": "date",
+      "required": true,
+      "enableBehavior": "all",
+      "enableWhen": [
+        {
+          "question": "550a5760-4ae6-4a52-9be0-a382b5035cad",
+          "operator": "exists",
+          "answerBoolean": false
+        },
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "linkId": "ff36c6b9-8975-4a2c-a9d1-f65d8d4b8f6f",
+      "text": "Is Age in Years or Weeks?",
+      "type": "choice",
+      "required": false,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "id": "10aba66c-b931-4538-a029-98b398901a1d",
+            "code": "years",
+            "display": "Years"
+          }
+        },
+        {
+          "valueCoding": {
+            "id": "026d793c-6090-43b8-be1b-4043e629456a",
+            "code": "weeks",
+            "display": "Weeks"
+          }
+        }
+      ],
+      "enableBehavior": "all",
+      "enableWhen": [
+        {
+          "question": "550a5760-4ae6-4a52-9be0-a382b5035cad",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:c3f41b65-196a-4c9f-87cb-5c3f12030cd5",
+            "code": "574378ab-079b-4922-9b37-6a56e2d1aa95"
+          }
+        },
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/sdf-fhirpath",
+          "valueString": "Patient.extension.where(url = 'http://helsenorge.no/fhir/StructureDefinition/sdf-age').value"
+        },
+        {
+          "url": "http://ehelse.no/fhir/StructureDefinition/validationtext",
+          "valueString": "Please enter a valid age"
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueInteger": 0
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "_valueDate": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/StructureDefinition/cqf-calculatedValue",
+                "valueExpression": {
+                  "language": "text/fhirpath",
+                  "expression": "iif(%resource.item.where(linkId='ff36c6b9-8975-4a2c-a9d1-f65d8d4b8f6f').answer.value.code = 'weeks', 731, 14)"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "linkId": "5b3ba7d2-98fe-45c7-8783-00659a2721b2",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.age",
+      "text": "Age",
+      "type": "integer",
+      "required": true,
+      "enableBehavior": "all",
+      "enableWhen": [
+        {
+          "question": "550a5760-4ae6-4a52-9be0-a382b5035cad",
+          "operator": "=",
+          "answerCoding": {
+            "system": "urn:uuid:c3f41b65-196a-4c9f-87cb-5c3f12030cd5",
+            "code": "574378ab-079b-4922-9b37-6a56e2d1aa95"
+          }
+        },
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/ValueSet/questionnaire-item-control",
+                "code": "drop-down"
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "Patient.gender"
+          }
+        }
+      ],
+      "linkId": "a128c2e1-3273-40e6-909c-91944232b061",
+      "text": "Sex",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "male",
+            "display": "Male"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "female",
+            "display": "Female"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "biological-sex-not-specified",
+            "display": "Biological sex not specified"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "intersex",
+            "display": "Intersex"
+          }
+        }
+      ],
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/entryFormat",
+          "valueString": "Leave this blank if their is no birth certificate"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+          "valueExpression": {
+            "language": "text/fhirpath",
+            "expression": "%resource.descendants().where(linkId='calculated-age').answer.value <= 14"
+          }
+        }
+      ],
+      "linkId": "c323bdd1-14cf-4c9e-81e5-79bf020fd0ae",
+      "text": "Child's Birth Certificate Number",
+      "type": "string",
+      "required": false
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+          "valueDecimal": 0
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+          "valueDecimal": 6
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/maxDecimalPlaces",
+          "valueDecimal": 3
+        }
+      ],
+      "linkId": "b33a4361-e9ff-49dd-afbd-b80c91a119ea",
+      "text": "Birth weight (kg)",
+      "type": "decimal",
+      "required": true,
+      "enableWhen": [
+        {
+          "question": "show-child-fields",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "caregiver-present",
+      "type": "boolean"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "caregiver-id",
+      "type": "string"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "location-id",
+      "type": "string"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+          "valueBoolean": true
+        }
+      ],
+      "linkId": "show-child-fields",
+      "type": "boolean"
+    }
+  ]
+}

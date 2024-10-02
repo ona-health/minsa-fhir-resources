@@ -1,0 +1,54 @@
+{
+  "resourceType": "Parameters",
+  "configType": "sync",
+  "parameter": [
+    {
+      "resource": {
+        "resourceType": "SearchParameter",
+        "name": "_id",
+        "code": "_id",
+        "base": [
+          "CarePlan",
+          "Condition",
+          "Consent",
+          "Encounter",
+          "Group",
+          "Immunization",
+          "List",
+          "Location",
+          "Observation",
+          "Patient",
+          "QuestionnaireResponse",
+          "RelatedPerson",
+          "ServiceRequest",
+          "Task"
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "SearchParameter",
+        "name": "count",
+        "code": "_count",
+        "base": [
+          "CarePlan",
+          "Condition",
+          "Consent",
+          "Encounter",
+          "Group",
+          "Immunization",
+          "List",
+          "Location",
+          "Observation",
+          "Patient",
+          "QuestionnaireResponse",
+          "RelatedPerson",
+          "ServiceRequest",
+          "Task"
+        ],
+        "type": "token",
+        "expression": "#count"
+      }
+    }
+  ]
+}

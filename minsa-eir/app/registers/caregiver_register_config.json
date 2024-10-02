@@ -1,0 +1,221 @@
+{
+  "appId": "minsaEIR",
+  "configType": "register",
+  "id": "caregiverRegister",
+  "fhirResource": {
+    "baseResource": {
+      "resource": "RelatedPerson",
+      "sortConfigs": [
+        {
+          "paramName": "_lastUpdated",
+          "dataType": "DATE",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    "relatedResources": [
+      {
+        "id": "availablePatients",
+        "resource": "Patient",
+        "searchParameter": "link",
+        "isRevInclude": true,
+        "relatedResources": [
+          {
+            "id": "availableTasks",
+            "resource": "Task",
+            "searchParameter": "subject",
+            "isRevInclude": true
+          }
+        ]
+      }
+    ]
+  },
+  "searchBar": {
+    "visible": true,
+    "display": "{{ search.name.or.id }}",
+    "computedRules": [
+      "relatedPersonFullName",
+      "relatedPersonId",
+      "relatedPersonIdentifier"
+    ]
+  },
+  "registerCard": {
+    "rules": [
+      {
+        "name": "relatedPersonFullName",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonFullName', fhirPath.extractValue(RelatedPerson, \"RelatedPerson.name.where(use='official').text\"))"
+        ]
+      },
+      {
+        "name": "relatedPersonFirstName",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonFirstName', fhirPath.extractValue(RelatedPerson, \"RelatedPerson.name.where(use='official').given.first()\"))"
+        ]
+      },
+      {
+        "name": "relatedPersonLastName",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonLastName', fhirPath.extractValue(RelatedPerson, \"RelatedPerson.name.where(use='official').family\"))"
+        ]
+      },
+      {
+        "name": "relatedPersonGender",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonGender', service.extractGender(RelatedPerson))"
+        ]
+      },
+      {
+        "name": "relatedPersonAge",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonAge', service.extractAge(RelatedPerson))"
+        ]
+      },
+      {
+        "name": "formattedRelatedPersonInfo",
+        "condition": "true",
+        "priority": 3,
+        "actions": [
+          "data.put('formattedRelatedPersonInfo', (data.get('relatedPersonFirstName') + ' ' + data.get('relatedPersonLastName')).trim() + ', ' + (data.get('relatedPersonGender') == 'Female' ? 'F' : (data.get('relatedPersonGender') == 'Male' ? 'M' : data.get('relatedPersonGender'))) + ', ' + data.get('relatedPersonAge'))"
+        ]
+      },
+      {
+        "name": "relatedPersonId",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonId', fhirPath.extractValue(RelatedPerson, 'RelatedPerson.id'))"
+        ]
+      },
+      {
+        "name": "relatedPersonIdentifier",
+        "condition": "true",
+        "actions": [
+          "data.put('relatedPersonIdentifier', fhirPath.extractValue(RelatedPerson, \"RelatedPerson.identifier[0].value\"))"
+        ]
+      },
+      {
+        "name": "numberOfChildren",
+        "condition": "true",
+        "actions": [
+          "data.put('numberOfChildren', availablePatients.size())"
+        ]
+      },
+      {
+        "name": "dueTaskList",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('dueTaskList', service.filterResources(availableTasks, 'Task.status = \"ready\"'))"
+        ]
+      },
+      {
+        "name": "overdueTaskList",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('overdueTaskList', service.filterResources(data.get('allTasks'), 'Task.status = \"cancelled\" or Task.status = \"failed\"'))"
+        ]
+      },
+      {
+        "name": "hasAnyDueTask",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('hasAnyDueTask', data.get('dueTaskList').size() > 0)"
+        ]
+      },
+      {
+        "name": "hasAnyOverdueTask",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('hasAnyOverdueTask', data.get('overdueTaskList').size() > 0)"
+        ]
+      },
+      {
+        "name": "visitStatus",
+        "condition": "true",
+        "priority": 2,
+        "actions": [
+          "data.put('visitStatus', data.get('hasAnyDueTask') ? 'DUE' : data.get('hasAnyOverdueTask') ? 'in_progress' : 'OVERDUE')"
+        ]
+      }
+    ],
+    "views": [
+      {
+        "viewType": "COLUMN",
+        "children": [
+          {
+            "viewType": "SERVICE_CARD",
+            "details": [
+              {
+                "viewType": "COMPOUND_TEXT",
+                "primaryText": "@{formattedRelatedPersonInfo}",
+                "primaryTextColor": "#000000"
+              },
+              {
+                "viewType": "COMPOUND_TEXT",
+                "primaryText": "ID: @{relatedPersonIdentifier}",
+                "fontSize": 14.0,
+                "primaryTextColor": "#000000"
+              }
+            ],
+            "showVerticalDivider": false,
+            "serviceButton": {
+              "visible": true,
+              "text": "@{numberOfChildren}",
+              "status": "@{visitStatus}",
+              "buttonType": "BIG",
+              "actions": [
+                {
+                  "trigger": "ON_CLICK",
+                  "workflow": "LAUNCH_PROFILE",
+                  "id": "caregiverProfile"
+                }
+              ]
+            },
+            "actions": [
+              {
+                "trigger": "ON_CLICK",
+                "workflow": "LAUNCH_PROFILE",
+                "id": "caregiverProfile"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "topScreenSection": {
+    "title": "Caregiver",
+    "searchBar": {
+      "visible": true,
+      "display": "{{ search.by.location.name }}",
+      "computedRules": [
+        "servicePointName"
+      ]
+    },
+    "menuIcons": [
+      {
+        "viewType": "IMAGE",
+        "size": 10,
+        "imageConfig": {
+          "type": "local",
+          "reference": "ic_toggle_map_view"
+        },
+        "actions": [
+          {
+            "trigger": "ON_CLICK",
+            "workflow": "LAUNCH_MAP",
+            "id": "locationMap"
+          }
+        ]
+      }
+    ]
+  }
+}
