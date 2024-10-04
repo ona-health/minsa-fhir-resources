@@ -1,21 +1,21 @@
-map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/patient-registration-sm" = 'NewPatientRegistration'
+map "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/new_patient-registration-sm" = 'NewPatientRegistration'
 
 uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse" as source
+uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target
 uses "http://hl7.org/fhir/StructureDefinition/Patient" as target
 
 group EirNewPatientRegistration(source src: QuestionnaireResponse, target bundle: Bundle) {
-    src -> bundle.id = uuid(),
-        bundle.type = 'collection' "r_bundle_static";
-    src -> bundle.entry as entry,
-        entry.resource = create('Patient') as patient then {
-                ExtractPatient(src, patient, bundle) "r_bundle_entries";
-        } "r_bundle";
+     src -> bundle.id = uuid() "rule_bundle_id";
+    src -> bundle.type = 'collection' "rule_bundle_type";
+    src -> bundle.entry as entry, entry.resource = create('Patient') as patient then
+        ExtractPatient(src, patient, bundle)"rule_bundle_entries";
 }
 
 group ExtractPatient(source src: QuestionnaireResponse, target patient: Patient, target bundle: Bundle) {
-        src -> patient.id = uuid(),
+        src -> patient.id = uuid() "r_patient_id";
+
         src -> patient.name = create('HumanName') as patientName then {
-            src -> patientName.use = 'official' "r_patient_name_use";
-            src -> patientName.text = evaluate(src, ($this.item.where(linkId = 'b8454469-bef4-4b87-8d87-6cefb097af61').answer.value.trim()) "r_patient_first_name";
+            src -> patientName.uses = 'official' "r_patient_name_use";
+            src -> patientName.text = evaluate(src, ($this.item.where(linkId = '66fb8a38-274e-4088-832f-d531e675b7cb').answer.value.trim())) "r_patient_first_name";
         } "r_patient_name";
 }
