@@ -1,0 +1,26 @@
+{
+    "resourceType": "QuestionnaireResponse",
+    "subject": {
+        "reference": "Patient/test_patient_id_0016"
+    },
+    "item": [
+        {
+            "linkId": "66fb8a38-274e-4088-832f-d531e675b7cb",
+            "text": "Nombres",
+            "answer": [
+                {
+                    "valueString": "Allan"
+                }
+            ]
+        },
+        {
+            "linkId": "303c2691-412e-4bf3-89b4-660ede7a0d2f",
+            "text": "Apellido Paternal",
+            "answer": [
+                {
+                    "valueString": "Allay"
+                }
+            ]
+        }
+    ]
+}
