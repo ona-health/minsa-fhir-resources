@@ -10,7 +10,7 @@
         "trigger": "ON_CLICK",
         "workflow": "LAUNCH_QUESTIONNAIRE",
         "questionnaire": {
-          "id": "b8454469-bef4-4b87-8d87-6cefb097af61",
+          "id": "new-patient-registration",
           "title": "Add New Patient",
           "saveButtonText": "Save",
           "planDefinitions": [],
@@ -43,6 +43,26 @@
         {
           "trigger": "ON_COUNT",
           "id": "caregiverRegister"
+        }
+      ]
+    },
+    {
+      "id": "allPatientsRegister",
+      "display": "All Patients",
+      "showCount": true,
+      "menuIconConfig": {
+        "type": "local",
+        "reference": "ic_profile"
+      },
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_REGISTER",
+          "id": "allPatientsRegister"
+        },
+        {
+          "trigger": "ON_COUNT",
+          "id": "allPatientsRegister"
         }
       ]
     }
