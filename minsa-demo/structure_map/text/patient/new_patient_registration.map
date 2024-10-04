@@ -13,9 +13,11 @@ group EirNewPatientRegistration(source src: QuestionnaireResponse, target bundle
 
 group ExtractPatient(source src: QuestionnaireResponse, target patient: Patient, target bundle: Bundle) {
         src -> patient.id = uuid() "r_patient_id";
+        src -> patient.active = true "r_patient_active"; 
 
         src -> patient.name = create('HumanName') as patientName then {
             src -> patientName.use = 'official' "r_patient_name_use";
             src -> patientName.text = evaluate(src, ($this.item.where(linkId = '66fb8a38-274e-4088-832f-d531e675b7cb').answer.value.trim())) "r_patient_first_name";
+            src -> patientName.given = evaluate(src, ($this.item.where(linkId = '303c2691-412e-4bf3-89b4-660ede7a0d2f').answer.value.trim())) "r_patient_other_name";
         } "r_patient_name";
 }

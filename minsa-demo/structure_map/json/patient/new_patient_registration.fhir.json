@@ -1,0 +1,272 @@
+{
+    "resourceType": "StructureMap",
+    "id": "new_patient-registration-sm",
+    "text": {
+        "status": "additional",
+        "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><pre>map &quot;https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/new_patient-registration-sm&quot; = 'NewPatientRegistration'\n\nuses &quot;http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse&quot; as source\nuses &quot;http://hl7.org/fhir/StructureDefinition/Bundle&quot; as target\nuses &quot;http://hl7.org/fhir/StructureDefinition/Patient&quot; as target\n\ngroup EirNewPatientRegistration(source src: QuestionnaireResponse, target bundle: Bundle) {\n     src -&gt; bundle.id = uuid() &quot;rule_bundle_id&quot;;\n    src -&gt; bundle.type = 'collection' &quot;rule_bundle_type&quot;;\n    src -&gt; bundle.entry as entry, entry.resource = create('Patient') as patient then\n        ExtractPatient(src, patient, bundle)&quot;rule_bundle_entries&quot;;\n}\n\ngroup ExtractPatient(source src: QuestionnaireResponse, target patient: Patient, target bundle: Bundle) {\n        src -&gt; patient.id = uuid() &quot;r_patient_id&quot;;\n        src -&gt; patient.active = true &quot;r_patient_active&quot;; \n\n        src -&gt; patient.name = create('HumanName') as patientName then {\n            src -&gt; patientName.use = 'official' &quot;r_patient_name_use&quot;;\n            src -&gt; patientName.text = evaluate(src, ($this.item.where(linkId = '66fb8a38-274e-4088-832f-d531e675b7cb').answer.value.trim())) &quot;r_patient_first_name&quot;;\n            src -&gt; patientName.given = evaluate(src, ($this.item.where(linkId = '303c2691-412e-4bf3-89b4-660ede7a0d2f').answer.value.trim())) &quot;r_patient_other_name&quot;;\n        } &quot;r_patient_name&quot;;\n}\n</pre></div>"
+    },
+    "url": "https://gateway.minsa-fhir.labs.smartregister.org/fhir/StructureMap/new_patient-registration-sm",
+    "name": "NewPatientRegistration",
+    "structure": [
+        {
+            "url": "http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse",
+            "mode": "source"
+        },
+        {
+            "url": "http://hl7.org/fhir/StructureDefinition/Bundle",
+            "mode": "target"
+        },
+        {
+            "url": "http://hl7.org/fhir/StructureDefinition/Patient",
+            "mode": "target"
+        }
+    ],
+    "group": [
+        {
+            "name": "EirNewPatientRegistration",
+            "typeMode": "none",
+            "input": [
+                {
+                    "name": "src",
+                    "type": "QuestionnaireResponse",
+                    "mode": "source"
+                },
+                {
+                    "name": "bundle",
+                    "type": "Bundle",
+                    "mode": "target"
+                }
+            ],
+            "rule": [
+                {
+                    "name": "rule_bundle_id",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "bundle",
+                            "contextType": "variable",
+                            "element": "id",
+                            "transform": "uuid"
+                        }
+                    ]
+                },
+                {
+                    "name": "rule_bundle_type",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "bundle",
+                            "contextType": "variable",
+                            "element": "type",
+                            "transform": "copy",
+                            "parameter": [
+                                {
+                                    "valueString": "collection"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "rule_bundle_entries",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "bundle",
+                            "contextType": "variable",
+                            "element": "entry",
+                            "variable": "entry"
+                        },
+                        {
+                            "context": "entry",
+                            "contextType": "variable",
+                            "element": "resource",
+                            "variable": "patient",
+                            "transform": "create",
+                            "parameter": [
+                                {
+                                    "valueString": "Patient"
+                                }
+                            ]
+                        }
+                    ],
+                    "dependent": [
+                        {
+                            "name": "ExtractPatient",
+                            "variable": [
+                                "src",
+                                "patient",
+                                "bundle"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ExtractPatient",
+            "typeMode": "none",
+            "input": [
+                {
+                    "name": "src",
+                    "type": "QuestionnaireResponse",
+                    "mode": "source"
+                },
+                {
+                    "name": "patient",
+                    "type": "Patient",
+                    "mode": "target"
+                },
+                {
+                    "name": "bundle",
+                    "type": "Bundle",
+                    "mode": "target"
+                }
+            ],
+            "rule": [
+                {
+                    "name": "r_patient_id",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "patient",
+                            "contextType": "variable",
+                            "element": "id",
+                            "transform": "uuid"
+                        }
+                    ]
+                },
+                {
+                    "name": "r_patient_active",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "patient",
+                            "contextType": "variable",
+                            "element": "active",
+                            "transform": "copy",
+                            "parameter": [
+                                {
+                                    "valueBoolean": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "r_patient_name",
+                    "source": [
+                        {
+                            "context": "src"
+                        }
+                    ],
+                    "target": [
+                        {
+                            "context": "patient",
+                            "contextType": "variable",
+                            "element": "name",
+                            "variable": "patientName",
+                            "transform": "create",
+                            "parameter": [
+                                {
+                                    "valueString": "HumanName"
+                                }
+                            ]
+                        }
+                    ],
+                    "rule": [
+                        {
+                            "name": "r_patient_name_use",
+                            "source": [
+                                {
+                                    "context": "src"
+                                }
+                            ],
+                            "target": [
+                                {
+                                    "context": "patientName",
+                                    "contextType": "variable",
+                                    "element": "use",
+                                    "transform": "copy",
+                                    "parameter": [
+                                        {
+                                            "valueString": "official"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "r_patient_first_name",
+                            "source": [
+                                {
+                                    "context": "src"
+                                }
+                            ],
+                            "target": [
+                                {
+                                    "context": "patientName",
+                                    "contextType": "variable",
+                                    "element": "text",
+                                    "transform": "evaluate",
+                                    "parameter": [
+                                        {
+                                            "valueId": "src"
+                                        },
+                                        {
+                                            "valueString": "($this.item.where(linkId = '66fb8a38-274e-4088-832f-d531e675b7cb').answer.value.trim())"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "r_patient_other_name",
+                            "source": [
+                                {
+                                    "context": "src"
+                                }
+                            ],
+                            "target": [
+                                {
+                                    "context": "patientName",
+                                    "contextType": "variable",
+                                    "element": "given",
+                                    "transform": "evaluate",
+                                    "parameter": [
+                                        {
+                                            "valueId": "src"
+                                        },
+                                        {
+                                            "valueString": "($this.item.where(linkId = '303c2691-412e-4bf3-89b4-660ede7a0d2f').answer.value.trim())"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
