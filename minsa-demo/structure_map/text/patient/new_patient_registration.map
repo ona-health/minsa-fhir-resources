@@ -15,7 +15,7 @@ group ExtractPatient(source src: QuestionnaireResponse, target patient: Patient,
         src -> patient.id = uuid() "r_patient_id";
 
         src -> patient.name = create('HumanName') as patientName then {
-            src -> patientName.uses = 'official' "r_patient_name_use";
+            src -> patientName.use = 'official' "r_patient_name_use";
             src -> patientName.text = evaluate(src, ($this.item.where(linkId = '66fb8a38-274e-4088-832f-d531e675b7cb').answer.value.trim())) "r_patient_first_name";
         } "r_patient_name";
 }
