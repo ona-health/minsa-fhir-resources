@@ -13,13 +13,6 @@
                 "code": "nb-NO",
                 "display": "Bokmål"
             }
-        ],
-        "security": [
-            {
-                "code": "3",
-                "display": "Helsehjelp (Full)",
-                "system": "urn:oid:2.16.578.1.12.4.1.1.7618"
-            }
         ]
     },
     "contact": [

@@ -1,0 +1,55 @@
+{
+    "appId": "minsaEIR",
+    "configType": "register",
+    "id": "allPatientsRegister",
+    "pageSize": 10,
+    "fhirResource": {
+        "baseResource": {
+            "resource": "Patient",
+            "sortConfigs": [
+                {
+                    "paramName": "_lastUpdated",
+                    "dataType": "DATE",
+                    "order": "DESCENDING"
+                }
+            ]
+        },
+        "relatedResources": []
+    },
+    "searchBar": {
+        "visible": true,
+        "display": "{{ search.name.or.id }}",
+        "computedRules": [
+            "patientName"
+        ]
+    },
+    "registerCard": {
+        "rules": [
+            {
+                "name": "patientName",
+                "condition": "true",
+                "actions": [
+                    "data.put('patientName', fhirPath.extractValue(Patient, \"Patient.name[0].select(text)\"))"
+                ]
+            }
+        ],
+        "views": [
+            {
+                "viewType": "COLUMN",
+                "children": [
+                    {
+                        "viewType": "SERVICE_CARD",
+                        "details": [
+                            {
+                                "viewType": "COMPOUND_TEXT",
+                                "primaryText": "@{patientName}",
+                                "primaryTextColor": "#000000"
+                            }
+                        ],
+                        "showVerticalDivider": false
+                    }
+                ]
+            }
+        ]
+    }
+}
