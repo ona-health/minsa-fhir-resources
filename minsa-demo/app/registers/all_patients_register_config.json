@@ -29,7 +29,7 @@
                 "name": "patientName",
                 "condition": "true",
                 "actions": [
-                    "data.put('patientName', fhirPath.extractValue(Patient, \"Patient.name[0].select(text)\"))"
+                    "data.put('patientName', fhirPath.extractValue(Patient, \"Patient.name.text\"))"
                 ]
             }
         ],
